@@ -1,0 +1,220 @@
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+html {
+	/* thiis defines what 1rem is, so we can't really call it typography */
+	font-size: 62.5%;
+	font-family: 'Google Sans', sans-serif;
+	/* it is advisable to use 10px for easy calculations when using rem*/
+}
+
+body {
+	background-color: #f1efe9;
+	box-sizing: border-box;
+	padding: 1rem 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.header {
+	width: 55%;
+	border-radius: 0.5rem;
+	background-image: url('../images/header-image.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 150px;
+	margin-bottom: 1rem;
+}
+
+.main {
+	position: relative;
+	width: 55%;
+	margin-bottom: 1rem;
+}
+
+.intro {
+	border-radius: 0.5rem;
+	background-color: #fff;
+	border-left: 1px solid #e7e8eb;
+	border-bottom: 1px solid #e7e8eb;
+	border-right: 1px solid #e7e8eb;
+	border-top: 1rem solid #765c23;
+	padding: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+.heading {
+	font-size: 3rem;
+	font-weight: 400;
+	letter-spacing: normal;
+}
+
+.paragraph-section {
+	margin-top: 1rem;
+}
+
+.paragraph {
+	font-size: 1.4rem;
+	line-height: 2rem;
+}
+
+.paragraph-12 {
+	word-wrap: break-word;
+	font-size: 1.2rem;
+	line-height: 2rem;
+}
+
+.red {
+	color: #ff0000;
+}
+
+.form-group {
+	position: relative;
+	overflow: hidden;
+	border-radius: 0.5rem;
+	background-color: #fff;
+	border: 1px solid #e7e8eb;
+	padding: 2.5rem 2rem;
+	margin-bottom: 1rem;
+	font-size: 1.4rem;
+}
+
+.label {
+	font-size: 1.4rem;
+	line-height: 2rem;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='date'] {
+	border: 0;
+	border-bottom: 1px solid #e5e5e5;
+	width: 40%;
+	margin-top: 3rem;
+	outline: 0;
+}
+
+input[type='date'] {
+	margin-top: 1rem;
+}
+
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='date']:focus {
+	border-bottom: 2px solid #765c23;
+}
+
+.file-input-wrapper {
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+}
+
+.file-input-wrapper input[type='file'] {
+	font-size: 1.4rem;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}
+
+.file-input {
+	margin-top: 0.5rem;
+	border: 1px solid #eee;
+	color: #000fff;
+	background-color: #fff;
+	padding: 1rem;
+	outline: 0;
+	font-weight: 500;
+	border-radius: 0.5rem;
+	font-size: 1.2rem;
+	transition: all 0.3s;
+}
+
+.file-input:hover {
+	background-color: #e4eefc;
+}
+
+.selector-wrapper {
+	margin-top: 1rem;
+	display: flex;
+	align-items: center;
+}
+
+.mg-horizontal {
+	margin: 0 1rem;
+}
+
+.btn {
+	background-color: #fff;
+	outline: 0;
+	border: 0;
+	padding: 0.8rem 1.7rem;
+	font-size: 1.4rem;
+	font-weight: 500;
+	color: #765c23;
+	margin-right: 1rem;
+	border-radius: 0.3rem;
+	box-shadow: 0 0.1rem 0.2rem #333;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.btn:hover {
+	background-color: #f1efe9;
+}
+
+.brown {
+	color: #fff;
+	background-color: #765c23;
+	display: none;
+}
+
+.brown:hover {
+	background-color: #836931;
+}
+
+.no-pad {
+	padding: 0;
+}
+
+.pad {
+	padding: 2.5rem 2rem;
+}
+
+.form-heading {
+	/* position: absolute;
+	top: 0;
+	left: 0;
+	display: block; */
+	padding: 1rem;
+	width: 100%;
+	background-color: #765c23;
+	color: #fff;
+}
+
+@media only screen and (max-width: 720px) {
+	.header {
+		width: 95%;
+		height: 60px;
+	}
+
+	.main {
+		width: 95%;
+	}
+
+	.intro {
+		padding: 1rem;
+	}
+
+	.heading {
+		font-size: 1.5rem;
+	}
+}
