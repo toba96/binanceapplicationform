@@ -200,6 +200,40 @@ input[type='date']:focus {
 	color: #fff;
 }
 
+.footer {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.guage-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 42%;
+}
+
+.guage-bar {
+	position: relative;
+	width: 12rem;
+	height: 1rem;
+	border-radius: 1.5rem;
+	background-color: #686e73;
+}
+
+.guage {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #8ab3f6;
+	width: 1.2rem;
+	align-self: flex-end;
+	height: 1rem;
+	border-radius: 1.5rem;
+	z-index: 2;
+}
+
 @media only screen and (max-width: 720px) {
 	.header {
 		width: 95%;

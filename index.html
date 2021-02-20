@@ -23,9 +23,18 @@
     <section id="form"></section>
 
     <div class="footer">
-      <button id="prev-button" onclick="onPrevious()" class="btn">Back</button>
-      <button id="next-button" onclick="onNext()" class="btn">Next</button>
-      <button id="submit-button" onclick="onSubmit()" class="btn brown">Submit</button>
+      <div>
+        <button id="prev-button" onclick="onPrevious()" class="btn">Back</button>
+        <button id="next-button" onclick="onNext()" class="btn">Next</button>
+        <button id="submit-button" onclick="onSubmit()" class="btn brown">Submit</button>
+      </div>
+
+      <div class="guage-wrapper">
+        <div class="guage-bar">
+          <div id="guage" class="guage"></div>
+        </div>
+        <p id="guage-text" class="paragraph-12"> 1 of 10</p>
+      </div>
     </div>
   </main>
 
