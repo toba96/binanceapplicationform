@@ -143,9 +143,115 @@ input[type='date']:focus {
 }
 
 .selector-wrapper {
-	margin-top: 1rem;
+	position: relative;
+	padding-top: 2rem;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding-left: 4rem;
+	text-align: center;
+	cursor: pointer;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+	position: absolute;
+	opacity: 0;
+	height: 0;
+	width: 0;
+	cursor: pointer;
+}
+
+.selector-wrapper input[type='checkbox'] ~ .other-info,
+.selector-wrapper input[type='radio'] ~ .other-info {
+	display: inline-block;
+	border: 0;
+	border-bottom: 1px solid #e5e5e5;
+	margin-top: 1rem;
+	width: 40%;
+	outline: 0;
+}
+
+.selector-wrapper input[type='checkbox'] ~ .other-info,
+.selector-wrapper input[type='radio'] ~ .other-info:focus {
+	border-bottom: 2px solid #765c23;
+}
+
+.custom-checkbox {
+	position: absolute;
+	top: 1.5rem;
+	left: 0;
+	width: 2.5rem;
+	height: 2.5rem;
+	background-color: #e4eefc;
+}
+
+.custom-radio {
+	position: absolute;
+	top: 1.5rem;
+	left: 0;
+	/* align-items: center;
+	justify-con */
+	border-radius: 50%;
+	/* padding: 0.4rem; */
+	width: 2.5rem;
+	height: 2.5rem;
+	background-color: #e4eefc;
+}
+
+.selector-wrapper:hover input[type='checkbox'] ~ .custom-checkbox {
+	background-color: #ccc;
+}
+
+.selector-wrapper:hover input[type='radio'] ~ .custom-radio {
+	background-color: #ccc;
+}
+
+.selector-wrapper input[type='checkbox']:checked ~ .custom-checkbox {
+	background-color: #765c23;
+}
+
+/* .selector-wrapper input[type='radio']:checked ~ .custom-radio {
+	background-color: #765c23;
+} */
+
+.custom-checkbox::after,
+.custom-radio::after {
+	content: '';
+	position: absolute;
+	display: none;
+}
+
+.selector-wrapper input[type='checkbox']:checked ~ .custom-checkbox:after,
+.selector-wrapper input[type='radio']:checked ~ .custom-radio:after {
+	display: block;
+	background-color: #765c23;
+}
+
+.custom-checkbox::after {
+	position: absolute;
+	top: 0.4rem;
+	left: 0.9rem;
+	width: 0.7rem;
+	height: 1.4rem;
+	border: solid #fff;
+	border-width: 0 0.3rem 0.3rem 0;
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.custom-radio::after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border-radius: 50%;
+	width: 60%;
+	height: 60%;
+	transform: translate(-50%, -50%);
 }
 
 .mg-horizontal {

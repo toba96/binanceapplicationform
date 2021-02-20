@@ -82,16 +82,20 @@
       </p>
   
   
-      <div class="selector-wrapper">
-        <input type="checkbox" name="position" value="CEO" required /> <p class="paragraph mg-horizontal">CEO</p>
-      </div>
-      <div class="selector-wrapper">
-        <input type="checkbox" name="position" value="Founder/Co-founder" required /> <p class="paragraph mg-horizontal">Founder/ Co-founder</p>
-      </div>
-      <div class="selector-wrapper">
-        <input type="checkbox" value="Other" required /> <p class="paragraph mg-horizontal">Other: </p>  <input name="position" type="text" name="email" required
+      <label class="selector-wrapper paragraph mg-horizontal">CEO 
+        <input type="checkbox" name="position" value="CEO" required />
+        <span class="custom-checkbox"></span>
+      </label>
+      <label class="selector-wrapper paragraph mg-horizontal">Founder/ Co-founder 
+        <input type="checkbox" name="position" value="Founder/Co-founder" required />
+        <span class="custom-checkbox"></span>
+      </label>
+      <label class="selector-wrapper paragraph mg-horizontal">Other:
+        <input type="checkbox" value="Other" required />
+        <span class="custom-checkbox"></span>
+        <input name="position" type="text" class="other-info" name="email" required
           value="" />
-      </div>
+      </label>
     </div>
   
     <div class="form-group">
@@ -138,14 +142,14 @@
     <div class="form-group">
       <p class="label">9. Have you previously submitted a listing application for the token/coin? <i class="red">*</i></p>
   
-      <div class="selector-wrapper">
+      <label class="selector-wrapper">Yes - I have updates since the last application that I would like to share 
         <input type="radio" name="position" value="Yes" required />
-        <p class="paragraph mg-horizontal">Yes - I have updates since the last application that I would like to share</p>
-      </div>
-      <div class="selector-wrapper">
+        <span class="custom-radio"></span>
+      </label>
+      <label class="selector-wrapper">No - This is my first listing application 
         <input type="radio" name="position" value="No" required />
-        <p class="paragraph mg-horizontal">No - This is my first listing application</p>
-      </div>
+        <span class="custom-radio"></span>
+      </label>
     </div>
   
     <div class="form-group">
@@ -153,18 +157,19 @@
         securities law or the
         laws of any other (non-U.S.) jurisdiction(s)? <i class="red">*</i></p>
   
-      <div class="selector-wrapper">
+      <label class="selector-wrapper paragraph mg-horizontal">Yes 
         <input type="radio" name="position" value="Yes" required />
-        <p class="paragraph mg-horizontal">Yes</p>
-      </div>
-      <div class="selector-wrapper">
+        <span class="custom-radio"></span>
+      </label>
+      <label class="selector-wrapper paragraph mg-horizontal">No 
         <input type="radio" name="position" value="No" required />
-        <p class="paragraph mg-horizontal">No</p>
-      </div>
-      <div class="selector-wrapper">
+        <span class="custom-radio"></span>
+      </label>
+      <label class="selector-wrapper  paragraph mg-horizontal"> Other:
         <input type="radio" name="position" value="Other" required />
-        <p class="paragraph mg-horizontal">Other: </p> <input name="position" type="text" name="email" required value="" />
-      </div>
+        <span class="custom-radio"></span>
+         <input name="position" type="text" class="other-info" name="email" required value="" />
+      </label>
     </div>
   
     <div class="form-group">
