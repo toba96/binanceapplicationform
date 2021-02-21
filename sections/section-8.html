@@ -18,7 +18,7 @@
   </div>
 </section>
 
-<div class="form-group no-pad">
+<div id="field-58" class="form-group no-pad">
   <div class="form-heading">
     <p class="paragraph">Wallet</h3>
   </div>
@@ -26,81 +26,81 @@
     <p class="label">1. Is your token/coin ERC 20 compliant?<i class="red">*</i></p>
 
     <label class="selector-wrapper">Yes
-      <input type="radio" name="position" value="Yes" required />
+      <input type="radio" name="58" onchange="onChange(this.name, this.value)" value="Yes" required />
       <span class="custom-radio"></span>
     </label>
     <label class="selector-wrapper">No
-      <input type="radio" name="position" value="No" required />
+      <input type="radio" name="58" onchange="onChange(this.name, this.value)" value="No" required />
       <span class="custom-radio"></span>
     </label>
   </div>
 </div>
 
-<div class="form-group">
+<div id="field-59" class="form-group">
   <p class="label">2. Please provide a link to the relevant blockchain explorer.
     <i class="red">*</i>
   </p>
 
-  <input type="text" name="company_name" placeholder="Your answer" required />
+  <input type="text" name="59" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
 </div>
 
-<div class="form-group">
+<div id="field-60" class="form-group">
   <p class="label">3. Which protocol is the token/coin based on? <i class="red">*</i></p>
 
   <label class="selector-wrapper paragraph mg-horizontal">Binance Chain
-    <input type="checkbox" name="position" value="Binance Chain" required />
+    <input type="checkbox" name="60" onchange="onSelectCheckbox(this.name, this.value)" value="Binance Chain" required />
     <span class="custom-checkbox"></span>
   </label>
   <label class="selector-wrapper paragraph mg-horizontal">Ethereum
-    <input type="checkbox" name="position" value="Ethereum" required />
+    <input type="checkbox" name="60" onchange="onSelectCheckbox(this.name, this.value)" value="Ethereum" required />
     <span class="custom-checkbox"></span>
   </label>
   <label class="selector-wrapper paragraph mg-horizontal">EOS
-    <input type="checkbox" name="position" value="EOS" required />
+    <input type="checkbox" name="60" onchange="onSelectCheckbox(this.name, this.value)" value="EOS" required />
     <span class="custom-checkbox"></span>
   </label>
   <label class="selector-wrapper paragraph mg-horizontal">NEO
-    <input type="checkbox" name="position" value="NEO" required />
+    <input type="checkbox" name="60" onchange="onSelectCheckbox(this.name, this.value)" value="NEO" required />
     <span class="custom-checkbox"></span>
   </label>
   <label class="selector-wrapper paragraph mg-horizontal">QTUM
-    <input type="checkbox" name="position" value="QTUM" required />
+    <input type="checkbox" name="60" onchange="onSelectCheckbox(this.name, this.value)" value="QTUM" required />
     <span class="custom-checkbox"></span>
   </label>
   <label class="selector-wrapper paragraph mg-horizontal">None
-    <input type="checkbox" name="position" value="None" required />
+    <input type="checkbox" name="60" onchange="onSelectCheckbox(this.name, this.value)" value="None" required />
     <span class="custom-checkbox"></span>
   </label>
   <label class="selector-wrapper paragraph mg-horizontal">Other:
     <input type="checkbox" value="Other" required />
     <span class="custom-checkbox"></span>
-    <input name="position" type="text" class="other-info" name="email" required value="" />
+    <input name="60" type="text" onchange="onSelectOtherCheckbox(this.name, this.value)" class="other-info" required value="" />
   </label>
 </div>
 
-<div class="form-group">
+<div id="field-61" class="form-group">
   <p class="label">
     4. Does the project team actively maintain a full node for your token? Please explain in detail below. <i class="red">*</i>
   </p>
 
 
-  <input type="text" name="email" placeholder="Your answer" required />
+  <input type="text" name="61" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
 </div>
 
-<div class="form-group">
+<div id="field-62" class="form-group">
   <p class="label">
     5. Does the project have a light wallet (non-full node) available on Mac? Please explain in detail below. <i class="red">*</i>
   </p>
 
 
-  <input type="text" name="email" placeholder="Your answer" required />
+  <input type="text" name="62" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
 </div>
 
-<div class="form-group">
+<div id="field-63" class="form-group">
   <p class="label">
     6. Is your token integrated with hardware wallet providers (Ledger/Trezor)? <i class="red">*</i>
   </p>
 
 
-  <input type="text" name="email" placeholder="Your answer" required />
+  <input type="text" name="63" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
 </div>
