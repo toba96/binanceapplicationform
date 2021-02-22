@@ -34,7 +34,7 @@
   <br>
   <p class="paragraph-12">Date</p>
 
-  <input type="date" name="71"  onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+  <input type="date" id="71" name="71"  onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
 </div>
 
 
@@ -45,7 +45,7 @@
   </p>
 
 
-  <input type="text" name="72" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+  <input type="text" id="72" name="72" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
 </div>
 
 <div id="field-73" class="form-group">
@@ -55,7 +55,7 @@
   </p>
 
 
-  <input type="text" name="73" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+  <input type="text" id="73" name="73" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
 </div>
 
 <div id="field-74" class="form-group">
@@ -63,14 +63,15 @@
     4. Please provide any other projects updates or developments that you would like to share. <i class="red">*</i>
   </p>
 
-  <input type="text" name="74" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+  <input type="text" id="74" name="74" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
 </div>
 
 <div id="field-75" class="form-group">
   <p class="label">5. Please provide any additional or supplementary documents that you wish to share. <i class="red">*</i></p>
 
   <div class="file-input-wrapper">
-    <input type="file" name="75" required />
+    <input type="file" id="75" name="75"  onchange="handleFile(this)" required />
     <button class="file-input">Add File</button>
+    <div id="filelist-75"></div>
   </div>
 </div>

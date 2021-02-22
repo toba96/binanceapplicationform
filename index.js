@@ -11,11 +11,11 @@ let fields = {
 		4: '',
 		5: '',
 		6: '',
-		7: '',
+		7: null,
 		8: '',
 		9: '',
 		10: '',
-		11: ''
+		11: []
 	},
 	project_overview: {
 		12: '',
@@ -109,7 +109,7 @@ let isFieldEmpty = step => {
 	const keys = Object.keys(fields[step]);
 	let callout;
 	for (let key of keys) {
-		if (fields[step][key] === '' || fields[step][key]?.length < 1) {
+		if (fields[step][key] === '' || fields[step][key]?.length < 1 || fields[step][key] === null) {
 			callout = key;
 			break;
 		}
@@ -129,22 +129,28 @@ function getPage() {
 		});
 	window.scrollTo(0, 0);
 
-	document.getElementById('next-button').style.display =
-		page !== totalPages ? 'inline-block' : 'none';
+	if (page === 10) {
+		document.getElementById('next-button').style.display = 'none';
+	} else {
+		document.getElementById('next-button').style.display =
+			page !== totalPages ? 'inline-block' : 'none';
+	}
+
 	document.getElementById('prev-button').style.display = page === 1 ? 'none' : 'inline-block';
 	document.getElementById('submit-button').style.display =
-		page === totalPages ? 'inline-block' : 'none';
+		page === totalPages || page === totalPages + 1 ? 'inline-block' : 'none';
 }
 
 function moveToNextPage() {
 	if (!freshApplication) {
-		page = 9;
+		page = 10;
 		document.getElementById('guage').style.width = '12rem';
+		document.getElementById('guage-text').textContent = `${page} of 10`;
 	} else {
 		if (page < totalPages) page++;
 		document.getElementById('guage').style.width = `${(page + 1) * 1.2}rem`;
+		document.getElementById('guage-text').textContent = `${page + 1} of 10`;
 	}
-	document.getElementById('guage-text').textContent = `${page + 1} of 10`;
 }
 
 function moveToPreviousPage() {
@@ -204,10 +210,15 @@ function onPrevious() {
 
 function onChange(name, value) {
 	fields[categories[page - 1]][name] = value;
-	document.getElementsByName(name).value = value;
+	document.getElementById(name).value = value;
+
+	if (fields[categories[page - 1]]['9'] === 'Yes') {
+		freshApplication = false;
+	} else {
+		freshApplication = true;
+	}
 
 	console.log(fields);
-	return value;
 }
 
 function onSelectOtherCheckbox(name, value) {
@@ -243,4 +254,98 @@ function onSelectCheckbox(name, value) {
 	}
 
 	console.log(fields);
+}
+
+function handleFile(input) {
+	fields[categories[page - 1]][input.name] = input.files[0];
+
+	document.getElementById(
+		`filelist-${input.name}`
+	).innerHTML = `<div>${input.files[0].name.substring(0, 15)}... <button onclick="removeFile(${
+		input.name
+	}, ${input.files[0].name})">x</button></div>`;
+	console.log(fields);
+}
+
+function handleFiles(input) {
+	fields[categories[page - 1]][input.name] = [
+		...fields[categories[page - 1]][input.name],
+		input.files[0]
+	];
+
+	document.getElementById(
+		`filelist-${input.name}`
+	).innerHTML = `<div>${input.files[0].name.substring(0, 15)}... <button onclick="removeFile(${
+		input.name
+	}, ${input.files[0].name})">x</button></div>`;
+
+	console.log(fields);
+}
+
+function removeFile(name, fileName) {
+	fields[categories[page - 1]][name] = fields[categories[page - 1]][name].filter(
+		file => file.name !== fileName
+	);
+}
+
+function saveAnswers() {
+	const body = [];
+	const list = {
+		...fields.intro,
+		...fields.project_overview,
+		...fields.users_community,
+		...fields.product,
+		...fields.team,
+		...fields.token_economics,
+		...fields.ico,
+		...fields.wallet,
+		...fields.miscellaneous,
+		...fields.project_updates,
+		email: undefined,
+		7: undefined,
+		11: undefined,
+		30: undefined,
+		32: undefined,
+		75: undefined
+	};
+
+	const keys = Object.keys(list);
+
+	for (let key of keys) {
+		body.push({ qid: key, answer: list[key] });
+	}
+
+	const inputFields = {
+		email: fields.intro.email,
+		body: body
+	};
+
+	console.log(inputFields);
+
+	// const headers = new Headers();
+	// headers.append(
+	// 	'Authorization',
+	// 	'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o'
+	// );
+
+	fetch('http://node.devng.host/api/v1/answers', {
+		method: 'POST',
+		mode: 'no-cors',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(inputFields)
+	})
+		.then(response => console.log(response))
+		// .then(result => console.log(result))
+		.catch(error => console.log(error));
+}
+
+function onSubmit() {
+	const callout = isFieldEmpty(categories[page - 1]);
+	if (!callout) {
+		saveAnswers();
+	} else {
+		calloutError(callout);
+	}
 }

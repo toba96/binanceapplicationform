@@ -41,33 +41,33 @@
   <p class="label">3. Please check each applicable feature of the token/coin (even if only applicable to certain issued token/coins): <i class="red">*</i></p>
 
   <label class="selector-wrapper paragraph mg-horizontal">Voting Rights
-    <input type="checkbox" name="28" onchange="onSelectCheckobox(this.name, this.value)" value="Voting Rights" required />
+    <input type="checkbox" name="28" onchange="onSelectCheckbox(this.name, this.value)" value="Voting Rights" required />
     <span class="custom-checkbox"></span>
   </label>
   <label class="selector-wrapper paragraph mg-horizontal">Profit/Revenue Sharing
-    <input type="checkbox" name="28" onchange="onSelectCheckobox(this.name, this.value)" value="Profit/Revenue Sharing" required />
+    <input type="checkbox" name="28" onchange="onSelectCheckbox(this.name, this.value)" value="Profit/Revenue Sharing" required />
     <span class="custom-checkbox"></span>
   </label>
   <label class="selector-wrapper paragraph mg-horizontal">Staking Rewards
-    <input type="checkbox" name="28" onchange="onSelectCheckobox(this.name, this.value)" value="Staking Rewards" required />
+    <input type="checkbox" name="28" onchange="onSelectCheckbox(this.name, this.value)" value="Staking Rewards" required />
     <span class="custom-checkbox"></span>
   </label>
   <label class="selector-wrapper paragraph mg-horizontal">Airdrop Rewards
-    <input type="checkbox" name="28" onchange="onSelectCheckobox(this.name, this.value)" value="Airdrop Rewards" required />
+    <input type="checkbox" name="28" onchange="onSelectCheckbox(this.name, this.value)" value="Airdrop Rewards" required />
     <span class="custom-checkbox"></span>
   </label>
   <label class="selector-wrapper paragraph mg-horizontal">Gas/Transaction Fee
-    <input type="checkbox" name="28" onchange="onSelectCheckobox(this.name, this.value)" value="Gas/Transaction Fee" required />
+    <input type="checkbox" name="28" onchange="onSelectCheckbox(this.name, this.value)" value="Gas/Transaction Fee" required />
     <span class="custom-checkbox"></span>
   </label>
   <label class="selector-wrapper paragraph mg-horizontal">Payment for service/product
-    <input type="checkbox" name="28" onchange="onSelectCheckobox(this.name, this.value)" value="Payment for service/product" required />
+    <input type="checkbox" name="28" onchange="onSelectCheckbox(this.name, this.value)" value="Payment for service/product" required />
     <span class="custom-checkbox"></span>
   </label>
   <label class="selector-wrapper paragraph mg-horizontal">Other:
     <input type="checkbox" value="Other" required />
     <span class="custom-checkbox"></span>
-    <input name="28" type="text"  onchange="onSelectOtherCheckobox(this.name, this.value)" class="other-info" required value="" />
+    <input name="28" type="text"  onchange="onSelectOtherCheckbox(this.name, this.value)" class="other-info" required value="" />
   </label>
 </div>
 
@@ -86,8 +86,9 @@
   open-source portion of the Project. <i class="red">*</i></p>
 
   <div class="file-input-wrapper">
-    <input type="file" name="30" required />
+    <input type="file" name="30" onchange="handleFile(this)" required />
     <button class="file-input">Add File</button>
+    <div id="filelist-30"></div>
   </div>
 </div>
 
@@ -106,7 +107,8 @@
  <i class="red">*</i></p>
 
   <div class="file-input-wrapper">
-    <input type="file" name="32" required />
+    <input type="file" name="32" onchange="handleFile(this)" required />
     <button class="file-input">Add File</button>
+    <div id="filelist-32"></div>
   </div>
 </div>
