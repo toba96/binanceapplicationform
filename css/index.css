@@ -123,6 +123,7 @@ input[type='date']:focus {
 	position: absolute;
 	left: 0;
 	top: 0;
+	height: 4rem;
 	opacity: 0;
 }
 

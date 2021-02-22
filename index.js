@@ -137,15 +137,7 @@ let isFieldEmpty = (step, fileCategory) => {
 
 const categories = getCategories();
 
-function getPage() {
-	// fetch(`sections/section-${page}.html`)
-	// 	.then(function (response) {
-	// 		return response.text();
-	// 	})
-	// 	.then(function (body) {
-	// 		document.getElementById('form').innerHTML = body;
-	// 	});
-
+function getSections() {
 	const children = document.getElementById('form').children;
 
 	console;
@@ -220,7 +212,7 @@ function calloutError(callout) {
 }
 
 function loadhtml() {
-	getPage();
+	getSections();
 }
 
 function onNext() {
@@ -230,7 +222,7 @@ function onNext() {
 	console.log(isFieldEmpty('fileFields', categories[page - 1]));
 	if (!callout) {
 		moveToNextPage();
-		getPage();
+		getSections();
 	} else {
 		calloutError(callout);
 	}
@@ -239,7 +231,7 @@ function onNext() {
 function onPrevious() {
 	moveToPreviousPage();
 
-	getPage();
+	getSections();
 }
 
 function onChange(name, value) {
@@ -320,9 +312,6 @@ function handleFiles(input) {
 			file.name
 		})">x</button></div>`;
 
-	// let divs = '';
-	// divs += fileFields[input.name].map(file => item(file));
-
 	document.getElementById(`filelist-${input.name}`).innerHTML = '';
 	for (let file of fileFields[categories[page - 1]][input.name]) {
 		document.getElementById(`filelist-${input.name}`).innerHTML += item(file);
@@ -349,9 +338,16 @@ function removeFiles(name, fileName) {
 		`<div class="file-item">${file.name.substring(
 			0,
 			15
-		)}... <button class="remove-btn" onclick="removeFiles(${name}, ${file.name})">x</button></div>`;
+		)}... <button class="remove-btn" onclick="removeFiles(${input.name}, ${
+			file.name
+		})">x</button></div>`;
 
-	document.getElementById(`filelist-${name}`).innerHTML += fileFields[name].map(file => item(file));
+	document.getElementById(`filelist-${input.name}`).innerHTML = '';
+	for (let file of fileFields[categories[page - 1]][input.name]) {
+		document.getElementById(`filelist-${input.name}`).innerHTML += item(file);
+	}
+
+	console.log(fileFields);
 }
 
 async function saveAnswers() {
