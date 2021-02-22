@@ -2,20 +2,18 @@ let page = 1;
 let totalPages = 9;
 let freshApplication = true;
 
+let email = '';
 let fields = {
 	intro: {
-		email: '',
 		1: '',
 		2: '',
 		3: [],
 		4: '',
 		5: '',
 		6: '',
-		7: null,
 		8: '',
 		9: '',
-		10: '',
-		11: []
+		10: ''
 	},
 	project_overview: {
 		12: '',
@@ -40,9 +38,7 @@ let fields = {
 		27: '',
 		28: '',
 		29: '',
-		30: '',
-		31: '',
-		32: ''
+		31: ''
 	},
 	team: {
 		33: '',
@@ -96,8 +92,21 @@ let fields = {
 		71: '',
 		72: '',
 		73: '',
-		74: '',
-		75: ''
+		74: ''
+	}
+};
+
+let fileFields = {
+	intro: {
+		7: null,
+		11: []
+	},
+	product: {
+		30: null,
+		32: null
+	},
+	project_updates: {
+		75: null
 	}
 };
 
@@ -105,13 +114,22 @@ let getCategories = () => {
 	return Object.keys(fields);
 };
 
-let isFieldEmpty = step => {
-	const keys = Object.keys(fields[step]);
+let isFieldEmpty = (step, fileCategory) => {
+	const keys =
+		step === 'fileFields' ? Object.keys(fileFields[fileCategory]) : Object.keys(fields[step]);
 	let callout;
+	const names = ['7', '11', '30', '32', '75'];
 	for (let key of keys) {
-		if (fields[step][key] === '' || fields[step][key]?.length < 1 || fields[step][key] === null) {
-			callout = key;
-			break;
+		if (key.includes(names)) {
+			if (fileFields[fileCategory][key] === null || fileFields[fileCategory][key]?.length < 1) {
+				callout = key;
+				break;
+			} else {
+				if (fields[step][key] === '' || fields[step][key]?.length < 1) {
+					callout = key;
+					break;
+				}
+			}
 		}
 	}
 	return callout;
@@ -193,7 +211,10 @@ function loadhtml() {
 }
 
 function onNext() {
-	const callout = isFieldEmpty(categories[page - 1]);
+	const callout =
+		isFieldEmpty(categories[page - 1], null) && isFieldEmpty('fileFields', categories[page - 1]);
+	console.log(isFieldEmpty(categories[page - 1], null));
+	console.log(isFieldEmpty('fileFields', categories[page - 1]));
 	if (!callout) {
 		moveToNextPage();
 		getPage();
@@ -209,24 +230,24 @@ function onPrevious() {
 }
 
 function onChange(name, value) {
-	fields[categories[page - 1]][name] = value;
-	document.getElementById(name).value = value;
-
-	if (fields[categories[page - 1]]['9'] === 'Yes') {
-		freshApplication = false;
+	if (name === 'email') {
+		email = value;
 	} else {
-		freshApplication = true;
-	}
+		fields[categories[page - 1]][name] = value;
+		document.getElementById(name).value = value;
 
-	console.log(fields);
+		if (fields[categories[page - 1]]['9'] === 'Yes') {
+			freshApplication = false;
+		} else {
+			freshApplication = true;
+		}
+	}
 }
 
 function onSelectOtherCheckbox(name, value) {
 	const isOtherField = fields[categories[page - 1]][name].find(
 		str => str !== 'CEO' && str !== 'Founder/Co-founder'
 	);
-
-	console.log(isOtherField);
 
 	if (isOtherField) {
 		fields[categories[page - 1]][name] = fields[categories[page - 1]][name].map(item => {
@@ -257,38 +278,70 @@ function onSelectCheckbox(name, value) {
 }
 
 function handleFile(input) {
-	fields[categories[page - 1]][input.name] = input.files[0];
+	fileFields[categories[page - 1]][input.name] = input.files[0];
 
 	document.getElementById(
 		`filelist-${input.name}`
-	).innerHTML = `<div>${input.files[0].name.substring(0, 15)}... <button onclick="removeFile(${
-		input.name
-	}, ${input.files[0].name})">x</button></div>`;
-	console.log(fields);
+	).innerHTML = `<div class="file-item">${input.files[0].name.substring(
+		0,
+		15
+	)}... <button class="remove-btn" onclick="removeFile(${input.name})">x</button></div>`;
+
+	document.getElementById(input.name).style.display = 'none';
+	document.getElementById(`file-input-${input.name}`).style.display = 'none';
+
+	console.log(fileFields);
 }
 
 function handleFiles(input) {
-	fields[categories[page - 1]][input.name] = [
-		...fields[categories[page - 1]][input.name],
+	fileFields[categories[page - 1]][input.name] = [
+		...fileFields[categories[page - 1]][input.name],
 		input.files[0]
 	];
 
-	document.getElementById(
-		`filelist-${input.name}`
-	).innerHTML = `<div>${input.files[0].name.substring(0, 15)}... <button onclick="removeFile(${
-		input.name
-	}, ${input.files[0].name})">x</button></div>`;
+	const item = file =>
+		`<div class="file-item">${file.name.substring(
+			0,
+			15
+		)}... <button class="remove-btn" onclick="removeFiles(${input.name}, ${
+			file.name
+		})">x</button></div>`;
 
-	console.log(fields);
+	// let divs = '';
+	// divs += fileFields[input.name].map(file => item(file));
+
+	document.getElementById(`filelist-${input.name}`).innerHTML = '';
+	for (let file of fileFields[categories[page - 1]][input.name]) {
+		document.getElementById(`filelist-${input.name}`).innerHTML = item(file);
+	}
+
+	console.log(fileFields);
 }
 
-function removeFile(name, fileName) {
-	fields[categories[page - 1]][name] = fields[categories[page - 1]][name].filter(
-		file => file.name !== fileName
-	);
+function removeFile(name) {
+	fileFields[categories[page - 1]][name] = null;
+
+	document.getElementById(name).style.display = 'block';
+	document.getElementById(`file-input-${name}`).style.display = 'block';
+
+	document.getElementById(`filelist-${name}`).innerHTML = '';
+
+	console.log(fileFields);
 }
 
-function saveAnswers() {
+function removeFiles(name, fileName) {
+	fileFields[categories[page - 1]][name] = fileFields[name].filter(file => file.name !== fileName);
+
+	const item = file =>
+		`<div class="file-item">${file.name.substring(
+			0,
+			15
+		)}... <button class="remove-btn" onclick="removeFiles(${name}, ${file.name})">x</button></div>`;
+
+	document.getElementById(`filelist-${name}`).innerHTML += fileFields[name].map(file => item(file));
+}
+
+async function saveAnswers() {
 	const body = [];
 	const list = {
 		...fields.intro,
@@ -300,13 +353,7 @@ function saveAnswers() {
 		...fields.ico,
 		...fields.wallet,
 		...fields.miscellaneous,
-		...fields.project_updates,
-		email: undefined,
-		7: undefined,
-		11: undefined,
-		30: undefined,
-		32: undefined,
-		75: undefined
+		...fields.project_updates
 	};
 
 	const keys = Object.keys(list);
@@ -316,36 +363,103 @@ function saveAnswers() {
 	}
 
 	const inputFields = {
-		email: fields.intro.email,
+		email: email,
 		body: body
 	};
 
-	console.log(inputFields);
-
-	// const headers = new Headers();
-	// headers.append(
-	// 	'Authorization',
-	// 	'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o'
-	// );
-
-	fetch('http://node.devng.host/api/v1/answers', {
-		method: 'POST',
-		mode: 'no-cors',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(inputFields)
-	})
-		.then(response => console.log(response))
-		// .then(result => console.log(result))
-		.catch(error => console.log(error));
+	try {
+		const response = await fetch('http://node.devng.host/api/v1/answers', {
+			method: 'POST',
+			// mode: 'no-cors',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(inputFields)
+		});
+		const result = response.text();
+		console.log(result);
+	} catch (error) {
+		console.log(error);
+	}
 }
 
-function onSubmit() {
-	const callout = isFieldEmpty(categories[page - 1]);
+async function saveFile() {
+	const files = {
+		7: fileFields.intro['7'],
+		11: fileFields.intro['11'],
+		30: fileFields.product['30'],
+		32: fileFields.product['32'],
+		75: fileFields.project_updates['75']
+	};
+
+	const keys = Object.keys(files);
+
+	for (let key of keys) {
+		console.log(files[key]);
+		console.log(typeof files[key]);
+		if (files[key] !== null) {
+			if (typeof files[key] === 'object') {
+				const formdata = new FormData();
+				formdata.append('file', files[key]);
+
+				try {
+					const response = await fetch(
+						`http://node.devng.host/api/v1/answers/upload?email=${email}&qid=${key}`,
+						{
+							method: 'POST',
+							// mode: 'no-cors',
+							headers: {
+								Authorization:
+									'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o',
+								'Content-Type': 'multipart/form-data'
+							},
+							body: formdata
+						}
+					);
+
+					const result = response.text();
+					console.log(result);
+				} catch (error) {
+					console.log(error);
+				}
+			} else {
+				for (let file of files[key]) {
+					const formdata = new FormData();
+					formdata.append('file', file);
+					try {
+						const response = await fetch(
+							`http://node.devng.host/api/v1/answers/upload?email=${email}&qid=${key}`,
+							{
+								method: 'POST',
+								// mode: 'no-cors',
+								headers: {
+									Authorization:
+										'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o',
+									'Content-Type': 'multipart/form-data'
+								},
+								body: formdata
+							}
+						);
+						const result = response.text();
+						console.log(result);
+					} catch (error) {
+						console.log(error);
+					}
+				}
+			}
+		}
+	}
+}
+
+async function onSubmit() {
+	const callout =
+		isFieldEmpty(categories[page - 1], null) && isFieldEmpty('fileFields', categories[page - 1]);
 	if (!callout) {
-		saveAnswers();
+		await saveFile();
+		// await saveAnswers();
 	} else {
 		calloutError(callout);
 	}
 }
+
+//TODO: HANDLE WHEN 'OTHERS' IS UNCHECKED

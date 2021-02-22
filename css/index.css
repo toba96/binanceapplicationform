@@ -114,6 +114,7 @@ input[type='date']:focus {
 .file-input-wrapper {
 	position: relative;
 	overflow: hidden;
+	width: 100%;
 	display: inline-block;
 }
 
@@ -143,8 +144,31 @@ input[type='date']:focus {
 }
 
 [id^='filelist-'] {
-	width: 60%;
+	width: 72%;
 	position: relative;
+	margin-top: 1rem;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 0.5rem;
+	/* align-items: flex-start; */
+}
+
+.file-item {
+	padding: 1rem;
+	display: flex;
+	font-size: 1.2rem;
+	align-items: center;
+	justify-content: space-around;
+	border: 1px solid #ccc;
+	border-radius: 0.3rem;
+}
+
+.remove-btn {
+	outline: 0;
+	border: 0;
+	font-size: 1.2rem;
+	background-color: #fff;
+	cursor: pointer;
 }
 
 .selector-wrapper {
