@@ -119,8 +119,9 @@ let isFieldEmpty = (step, fileCategory) => {
 		step === 'fileFields' ? Object.keys(fileFields[fileCategory]) : Object.keys(fields[step]);
 	let callout;
 	const names = ['7', '11', '30', '32', '75'];
+	console.log(fields['intro']['1'] === '' || fields['intro']['1']?.length < 1);
 	for (let key of keys) {
-		if (key.includes(names)) {
+		if (step === 'fileFields') {
 			if (fileFields[fileCategory][key] === null || fileFields[fileCategory][key]?.length < 1) {
 				callout = key;
 				break;
@@ -237,6 +238,19 @@ function onPrevious() {
 function onChange(name, value) {
 	if (name === 'email') {
 		email = value;
+		fetch(`http://node.devng.host/api/v1/answers/email/${email}`, {
+			headers: {
+				Authorization:
+					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o'
+			}
+		})
+			.then(response => response.json())
+			.then(result => {
+				if (result.email === email) {
+					alert(result.message);
+					window.location.href = 'https://binance.sg';
+				}
+			});
 	} else {
 		fields[categories[page - 1]][name] = value;
 		document.getElementById(name).value = value;
@@ -332,19 +346,22 @@ function removeFile(name) {
 }
 
 function removeFiles(name, fileName) {
-	fileFields[categories[page - 1]][name] = fileFields[name].filter(file => file.name !== fileName);
+	fileFields[categories[page - 1]][name] = fileFields[categories[page - 1]][name].filter(
+		file => file.name !== fileName
+	);
+
+	console.log(fileFields[categories[page - 1]][name]);
 
 	const item = file =>
 		`<div class="file-item">${file.name.substring(
 			0,
 			15
-		)}... <button class="remove-btn" onclick="removeFiles(${input.name}, ${
-			file.name
-		})">x</button></div>`;
+		)}... <button class="remove-btn" onclick="removeFiles(${name}, ${file.name})">x</button></div>`;
 
-	document.getElementById(`filelist-${input.name}`).innerHTML = '';
-	for (let file of fileFields[categories[page - 1]][input.name]) {
-		document.getElementById(`filelist-${input.name}`).innerHTML += item(file);
+	document.getElementById(`filelist-${name}`).innerHTML = '';
+	for (let file of fileFields[categories[page - 1]][name]) {
+		console.log(file);
+		document.getElementById(`filelist-${name}`).innerHTML += item(file);
 	}
 
 	console.log(fileFields);
