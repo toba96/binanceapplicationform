@@ -14,13 +14,1162 @@
   <title>Binance Listing Application Form</title>
 </head>
 
-<body onload="loadhtml()">
+<body id="body" onload="loadhtml()">
   <header class="header">
     
   </header>
 
   <main class="main">
-    <section id="form"></section>
+    <section id="form">
+      <div>
+        <section class="intro">
+          <h3 class="heading">Binance Listing Application Form</h3>
+        
+          <div class="paragraph-section">
+            <p class="paragraph">This is the application form for token/coin listing on Binance.</p>
+        
+            <br>
+        
+            <p class="paragraph">
+              Please note that the information you provide to us may be made public in the future in accordance with our data
+              protection policy. A copy of your responses will be emailed to the address that you provide.
+            </p>
+        
+            <br>
+        
+            <p class="paragraph">
+              Before filling out this form, please read the following guidelines:
+              <br>
+              <a
+                href="https://www.linkedin.com/pulse/binance-listing-tips-changpeng-zhao.">https://www.linkedin.com/pulse/binance-listing-tips-changpeng-zhao.</a>
+            </p>
+        
+            <br>
+        
+            <p class="paragraph">
+              If you have previously filled out the application form for your project, please refrain from applying again unless
+              there
+              are significant updates or improvements that you would like to bring to our attention, which may be detailed in
+              the “Project Updates” section below. Any submissions with substantially duplicative information will be DENIED.
+            </p>
+        
+            <br>
+        
+            <p class="paragraph">
+              Please be aware that we receive a large volume of applications and appreciate your patience. While we endeavor to
+              process them as quickly as possible, we are unable to provide any direct feedback on your application if it does
+              not pass our initial review based on the current stage your project is at.
+            </p>
+        
+            <br>
+        
+            <p class="paragraph">
+              The name and photo associated with your Google account will be recorded when you upload files and submit this
+              form.
+            </p>
+        
+            <br>
+        
+            <p class="paragraph red">* Required</p>
+        
+          </div>
+        </section>
+        
+        <!-- <form> -->
+        <div id="field-email" class="form-group">
+          <p class="label">Email address <i class="red">*</i></p>
+        
+          <input type="email" id="email" name="email" onchange="onChange(this.name, this.value)" required />
+        </div>
+        
+        <div id="field-1" class="form-group">
+          <p class="label">1. Please provide your full name. <i class="red">*</i></p>
+        
+          <input type="text" id="1" name="1" onchange="onChange(this.name, this.value)" required />
+        </div>
+        
+        <div id="field-2" class="form-group">
+          <p class="label">2. Please provide the name of your Company (the “Company”). <i class="red">*</i></p>
+        
+          <input type="text" id="2" name="2" onchange="onChange(this.name, this.value)" required />
+        </div>
+        
+        <div id="field-3" class="form-group">
+          <p class="label">
+            3. Please confirm your position with this Project. <i class="red">*</i>
+          <p class="paragraph-12">Tick all that apply. If "Other", please specify.</p>
+          </p>
+        
+        
+          <label class="selector-wrapper paragraph mg-horizontal">CEO
+            <input type="checkbox" id="3" name="3" onchange="onSelectCheckbox(this.name, this.value)" value="CEO" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Founder/ Co-founder
+            <input type="checkbox" id="3" name="3" onchange="onSelectCheckbox(this.name, this.value)" value="Founder/Co-founder"
+              required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Other:
+            <input type="checkbox" value="Other" required />
+            <span class="custom-checkbox"></span>
+            <input name="3" id="3" type="text" onchange="onSelectOtherCheckbox(this.name, this.value)" class="other-info"
+              required />
+          </label>
+        </div>
+        
+        <div id="field-4" class="form-group">
+          <p class="label">4. Please provide the project name. <i class="red">*</i></p>
+        
+          <input type="text" name="4" id="4" onchange="onChange(this.name, this.value)" required />
+        </div>
+        
+        <div id="field-5" class="form-group">
+          <p class="label">5. Please provide the token/coin full name. <i class="red">*</i></p>
+        
+          <input type="text" name="5" id="5" onchange="onChange(this.name, this.value)" required />
+        </div>
+        
+        <div id="field-6" class="form-group">
+          <p class="label">6. Please provide the project's official website. <i class="red">*</i></p>
+        
+          <input type="text" name="6" id="6" onchange="onChange(this.name, this.value)" required />
+        </div>
+        
+        <div id="field-7" class="form-group">
+          <p class="label">7. Please provide a copy of the Binance Non-Disclosure Agreement (“NDA”) signed by the Founder/CEO
+            of the Company. <i class="red">*</i></p>
+        
+          <p class="paragraph-12">
+            (Download NDA at
+            <a
+              href="https://drive.google.com/file/d/1FDnLUKdnx6IuDkej5zElVEq5PCaUrXWY/view?usp=sharing">https://drive.google.com/file/d/1FDnLUKdnx6IuDkej5zElVEq5PCaUrXWY/view?usp=sharing</a>
+            )
+          </p>
+        
+          <div class="file-input-wrapper">
+            <input type="file" name="7" id="7" onchange="handleFile(this)" required />
+            <button id="file-input-7" class="file-input">Add File</button>
+            <div id="filelist-7"></div>
+          </div>
+        </div>
+        
+        <div id="field-8" class="form-group">
+          <p class="label">8. Please provide a one sentence pitch for your project (the "Project") (e.g. Ripple: enterprise
+            payment settlement
+            network ) <i class="red">*</i></p>
+        
+          <input type="text" name="8" id="8" onchange="onChange(this.name, this.value)" required />
+        </div>
+        
+        <div id="field-9" class="form-group">
+          <p class="label">9. Have you previously submitted a listing application for the token/coin? <i class="red">*</i></p>
+        
+          <label class="selector-wrapper">Yes - I have updates since the last application that I would like to share
+            <input type="radio" name="9" id="9" onchange="onChange(this.name, this.value)" value="Yes" required />
+            <span class="custom-radio"></span>
+          </label>
+          <label class="selector-wrapper">No - This is my first listing application
+            <input type="radio" name="9" id="9" onchange="onChange(this.name, this.value)" value="No" required />
+            <span class="custom-radio"></span>
+          </label>
+        </div>
+        
+        <div id="field-10" class="form-group">
+          <p class="label">10. Is the token/coin a security or otherwise a regulated product or instrument under U.S. federal
+            securities law or the
+            laws of any other (non-U.S.) jurisdiction(s)? <i class="red">*</i></p>
+        
+          <label class="selector-wrapper paragraph mg-horizontal">Yes
+            <input type="radio" name="10" id="10" onchange="onChange(this.name, this.value)" value="Yes" required />
+            <span class="custom-radio"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">No
+            <input type="radio" name="10" id="10" onchange="onChange(this.name, this.value)" value="No" required />
+            <span class="custom-radio"></span>
+          </label>
+          <label class="selector-wrapper  paragraph mg-horizontal"> Other:
+            <input type="radio" name="10" id="10" value="Other" required />
+            <span class="custom-radio"></span>
+            <input name="10" id="10" type="text" onchange="onChange(this.name, this.value)" class="other-info" name="10"
+              required />
+          </label>
+        </div>
+        
+        <div id="field-11" class="form-group">
+          <p class="label">11. Please attach the legal opinion documents advising or stating that the token/coin is not a
+            security or otherwise a
+            regulated product or instrument under applicable laws. <i class="red">*</i></p>
+        
+          <div class="file-input-wrapper">
+            <input type="file" id="11" name="11" onchange="handleFiles(this)" required />
+            <button id="file-input-11" class="file-input">Add File</button>
+            <div id="filelist-11"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <section class="intro">
+          <h3 class="heading">Binance Listing Application Form</h3>
+        
+          <div class="paragraph-section">
+        
+            <p class="paragraph">The name and photo associated with your Google account will be recorded when you upload files
+              and submit this form.</p>
+        
+            <br>
+        
+            <p class="paragraph red">* Required</p>
+        
+          </div>
+        </section>
+        
+        <div id="field-12" class="form-group no-pad">
+          <div class="form-heading">
+            <p class="paragraph">Project overview</h3>
+          </div>
+          <div class="pad">
+            <p class="label">1. Please provide a permanent link to the Project whitepaper. <i class="red">*</i></p>
+        
+            <input type="email" name="12" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+          </div>
+        </div>
+        
+        <div id="field-13" class="form-group">
+          <p class="label">2. What is the nature of the Project? <i class="red">*</i></p>
+          <p class="paragraph-12">Tick all that apply.</p>
+        
+          <label class="selector-wrapper paragraph mg-horizontal">Currency
+            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Currency" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Dapp
+            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Dapp" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Payment Token
+            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Payment Token" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Protocol
+            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Protocol" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Platform
+            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Platform" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Stable Coin
+            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Stable Coin" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Defi
+            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Defi" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">NFT
+            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="NFT" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Other:
+            <input type="checkbox" value="Other" required />
+            <span class="custom-checkbox"></span>
+            <input name="13" type="text" class="other-info" onchange="onChange(this.name, this.value)" required value="" />
+          </label>
+        </div>
+        
+        <div id="field-14" class="form-group">
+          <p class="label">3. What are the problems/pain-points the project is trying to solve? Why did you start this project?
+            <i class="red">*</i></p>
+        
+          <input type="text" name="14" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-15" class="form-group">
+          <p class="label">
+            4. What is the target industry of the project (e.g. finance, healthcare, supply chain, social media and energy, etc)
+            and
+            what is the market size? <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="15" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-16" class="form-group">
+          <p class="label">5. Who are the target users? (e.g. consumers, service providers, retail investors, professional
+            investors, etc.) <i class="red">*</i></p>
+        
+          <input type="text" name="16" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-17" class="form-group">
+          <p class="label">6. Please provide a brief project history. <i class="red">*</i></p>
+        
+          <input type="text" name="17" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-18" class="form-group">
+          <p class="label">7. What is the long term vision of the Project and how do you expect to get there? <i
+              class="red">*</i></p>
+        
+          <input type="text" name="18" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-19" class="form-group">
+          <p class="label">8. Please provide a detailed quarterly project roadmap (i.e., technology and commercial development)
+            with relevant
+            milestones for the next 4-6 quarters. <i class="red">*</i></p>
+        
+          <input type="text" name="19" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-20" class="form-group">
+          <p class="label">9. Please provide a comprehensive description of the token/coin, including core use cases and an
+            overview of the token
+            economy. <i class="red">*</i></p>
+        
+          <input type="text" name="20" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-21" class="form-group">
+          <p class="label">10. Why do you think a native token is necessary for your Project? <i class="red">*</i></p>
+        
+          <input type="text" name="21" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-22" class="form-group">
+          <p class="label">11. Who are the Project’s key competitors (crypto and non-crypto) ? How do you plan to differentiate
+            the Project? <i class="red">*</i></p>
+        
+          <input type="text" name="22" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+      </div>
+
+      <div>
+        <section class="intro">
+          <h3 class="heading">Binance Listing Application Form</h3>
+        
+          <div class="paragraph-section">
+        
+            <p class="paragraph">The name and photo associated with your Google account will be recorded when you upload files
+              and submit this form.</p>
+        
+            <br>
+        
+            <p class="paragraph red">* Required</p>
+        
+          </div>
+        </section>
+        
+        <div id="field-23" class="form-group no-pad">
+          <div class="form-heading">
+            <p class="paragraph">Users & Community</h3>
+          </div>
+          <div class="pad">
+            <p class="label">1. Please share with us any key stats of your Project, such as the total number of users, DAU, MAU,
+              etc. Please only
+              include users of the Project’s product. Do not include or reference the number of social media followers the
+              Project
+              has. <i class="red">*</i></p>
+        
+            <input type="email" name="23" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+          </div>
+        </div>
+        
+        <div id="field-24" class="form-group">
+          <p class="label">2. Please discuss your social communities and include links along with user counts per media outlet
+            (e.g., Telegram,
+            Reddit, Slack, Twitter, Facebook, Instagram, Line, Viber, KakaoTalk, Imo, Zalo, BBM, ChatOn, etc.) Please be as
+            detailed
+            as possible.
+            <i class="red">*</i>
+          </p>
+        
+          <input type="text" name="24" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-25" class="form-group">
+          <p class="label">
+            3. Please describe your developer communities and include links along with any recent campaigns to engage developers
+            (bounties, hackathons, meetups, etc.). <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="25" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+
+      </div>
+
+      <div>
+        <section class="intro">
+          <h3 class="heading">Binance Listing Application Form</h3>
+        
+          <div class="paragraph-section">
+        
+            <p class="paragraph">The name and photo associated with your Google account will be recorded when you upload files
+              and submit this form.</p>
+        
+            <br>
+        
+            <p class="paragraph red">* Required</p>
+        
+          </div>
+        </section>
+        
+        <div id="field-26" class="form-group no-pad">
+          <div class="form-heading">
+            <p class="paragraph">Product</h3>
+          </div>
+          <div class="pad">
+            <p class="label">1. What level of development have you already achieved? (e.g., MVP/Alpha/Beta/Testnet/Mainnet)? <i
+                class="red">*</i></p>
+        
+            <input type="email" name="26" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+          </div>
+        </div>
+        
+        <div id="field-27" class="form-group">
+          <p class="label">2. Please share with us a link to the demo or the product for us to try it.
+            <i class="red">*</i>
+          </p>
+        
+          <input type="text" name="27" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-28" class="form-group">
+          <p class="label">3. Please check each applicable feature of the token/coin (even if only applicable to certain issued
+            token/coins): <i class="red">*</i></p>
+        
+          <label class="selector-wrapper paragraph mg-horizontal">Voting Rights
+            <input type="checkbox" name="28" onchange="onSelectCheckbox(this.name, this.value)" value="Voting Rights"
+              required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Profit/Revenue Sharing
+            <input type="checkbox" name="28" onchange="onSelectCheckbox(this.name, this.value)" value="Profit/Revenue Sharing"
+              required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Staking Rewards
+            <input type="checkbox" name="28" onchange="onSelectCheckbox(this.name, this.value)" value="Staking Rewards"
+              required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Airdrop Rewards
+            <input type="checkbox" name="28" onchange="onSelectCheckbox(this.name, this.value)" value="Airdrop Rewards"
+              required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Gas/Transaction Fee
+            <input type="checkbox" name="28" onchange="onSelectCheckbox(this.name, this.value)" value="Gas/Transaction Fee"
+              required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Payment for service/product
+            <input type="checkbox" name="28" onchange="onSelectCheckbox(this.name, this.value)"
+              value="Payment for service/product" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Other:
+            <input type="checkbox" value="Other" required />
+            <span class="custom-checkbox"></span>
+            <input name="28" type="text" onchange="onSelectOtherCheckbox(this.name, this.value)" class="other-info" required
+              value="" />
+          </label>
+        </div>
+        
+        <div id="field-29" class="form-group">
+          <p class="label">
+            4. If you have checked any applicable features in the previous question, please describe each applicable feature and
+            how
+            it is associated with the token/coin. <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="29" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-30" class="form-group">
+          <p class="label">5. Is the project open-source? If so, please provide any copyright or other open source license
+            applicable to the
+            open-source portion of the Project. <i class="red">*</i></p>
+        
+          <div class="file-input-wrapper">
+            <input type="file" name="30" onchange="handleFile(this)" required />
+            <button class="file-input">Add File</button>
+            <div id="filelist-30"></div>
+          </div>
+        </div>
+        
+        <div id="field-31" class="form-group">
+          <p class="label">
+            6. Please provide a link to your Github repo. <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="31" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-32" class="form-group">
+          <p class="label">7. Have you engaged any third parties to conduct a code design and security audit? If so, please
+            share the reports /
+            documentation.
+            <i class="red">*</i>
+          </p>
+        
+          <div class="file-input-wrapper">
+            <input type="file" name="32" onchange="handleFile(this)" required />
+            <button class="file-input">Add File</button>
+            <div id="filelist-32"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <section class="intro">
+          <h3 class="heading">Binance Listing Application Form</h3>
+        
+          <div class="paragraph-section">
+        
+            <p class="paragraph">The name and photo associated with your Google account will be recorded when you upload files
+              and submit this form.</p>
+        
+            <br>
+        
+            <p class="paragraph red">* Required</p>
+        
+          </div>
+        </section>
+        
+        <div id="field-33" class="form-group no-pad">
+          <div class="form-heading">
+            <p class="paragraph">Team</h3>
+          </div>
+          <div class="pad">
+            <p class="label">1. Where is the core team based and what is the current team size? Please list each core team
+              member (including both
+              commercial and technical team members) with their summary profiles (with Github and/or Linkedin), outlining their
+              respective roles in the project. <i class="red">*</i></p>
+        
+            <input type="email" name="33" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+          </div>
+        </div>
+        
+        <div id="field-34" class="form-group">
+          <p class="label">
+            2. Are any of your team members not full-time? <i class="red">*</i>
+          </p>
+        
+          <label class="selector-wrapper">Yes
+            <input type="radio" name="34 onchange=" onChange(this.name, this.value)"" value="Yes" required />
+            <span class="custom-radio"></span>
+          </label>
+          <label class="selector-wrapper">No
+            <input type="radio" name="34" onchange="onChange(this.name, this.value)" value="No" required />
+            <span class="custom-radio"></span>
+          </label>
+        </div>
+        
+        <div id="field-35" class="form-group">
+          <p class="label">3. Are any of your team members involved in other projects (crypto or non-crypto)?<i
+              class="red">*</i></p>
+        
+          <label class="selector-wrapper">Yes
+            <input type="radio" name="35" onchange="onChange(this.name, this.value)" value="Yes" required />
+            <span class="custom-radio"></span>
+          </label>
+          <label class="selector-wrapper">No
+            <input type="radio" name="35" onchange="onChange(this.name, this.value)" value="No" required />
+            <span class="custom-radio"></span>
+          </label>
+        </div>
+        
+        <div id="field-36" class="form-group">
+          <p class="label">
+            4. If yes, please list all other projects they are currently working on / involved in
+          </p>
+        
+        
+          <input type="text" name="36" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-37" class="form-group">
+          <p class="label">
+            5. Who are the Project's advisors? How have each of them helped your project in the past? Have each received
+            compensation? If so, when were they paid and how much did they receive? How do you expect them to continuing helping
+            you
+            in the future?<i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="37" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+      </div>
+
+      <div>
+        <section class="intro">
+          <h3 class="heading">Binance Listing Application Form</h3>
+        
+          <div class="paragraph-section">
+        
+            <p class="paragraph">The name and photo associated with your Google account will be recorded when you upload files
+              and submit this form.</p>
+        
+            <br>
+        
+            <p class="paragraph red">* Required</p>
+        
+          </div>
+        </section>
+        
+        <div id="field-38" class="form-group no-pad">
+          <div class="form-heading">
+            <p class="paragraph">Token Economics</h3>
+          </div>
+          <div class="pad">
+            <p class="label">1. What is the current market capitalization of the token/coin (based on the current date of
+              submission)? <i class="red">*</i></p>
+        
+            <input type="email" name="38" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+          </div>
+        </div>
+        
+        <div id="field-39" class="form-group">
+          <p class="label">2. What is the total token/coin supply? How much is currently circulating?
+            <i class="red">*</i>
+          </p>
+        
+          <input type="text" name="39" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-40" class="form-group">
+          <p class="label">
+            3. Which exchange(s) is the token/coin currently trading on? <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="40" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-41" class="form-group">
+          <p class="label">
+            4. Was the token/coin listed on any exchange prior to the public launch? If so, please specify. <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="41" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+      </div>
+
+      <div>
+        <section class="intro">
+          <h3 class="heading">Binance Listing Application Form</h3>
+        
+          <div class="paragraph-section">
+        
+            <p class="paragraph">The name and photo associated with your Google account will be recorded when you upload files
+              and submit this form.</p>
+        
+            <br>
+        
+            <p class="paragraph red">* Required</p>
+        
+          </div>
+        </section>
+        
+        <div id="field-42" class="form-group no-pad">
+          <div class="form-heading">
+            <p class="paragraph">ICO and Other Offerings of the Token/Coin</h3>
+          </div>
+          <div class="pad">
+            <p class="label">1. Was the token/coin offered through an ICO?<i class="red">*</i></p>
+        
+            <label class="selector-wrapper">Yes
+              <input type="radio" name="42" onchange="onChange(this.name, this.value)" value="Yes" required />
+              <span class="custom-radio"></span>
+            </label>
+            <label class="selector-wrapper">No
+              <input type="radio" name="42" onchange="onChange(this.name, this.value)" value="No" required />
+              <span class="custom-radio"></span>
+            </label>
+          </div>
+        </div>
+        
+        <div id="field-43" class="form-group">
+          <p class="label">2. What was the ICO price per token/coin? (e.g. 1 ETH = 1000 XX)
+            <i class="red">*</i>
+          </p>
+        
+          <input type="text" name="43" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-44" class="form-group">
+          <p class="label">
+            3. How much was raised during the ICO? For what percentage of supply? <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="44" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-45" class="form-group">
+          <p class="label">
+            4. When was the ICO launch date and what was the duration of the ICO (number of days)? <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="45" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-46" class="form-group">
+          <p class="label">
+            5. On which platform did you conduct the ICO? <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="46" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-47" class="form-group">
+          <p class="label">
+            6. Did the ICO have a hard cap? If so, what percentage of the hard cap was reached? <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="47" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-48" class="form-group">
+          <p class="label">
+            7. How were the funds raised during the ICO used? What is the planned use for such funds going forward? <i
+              class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="48" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-49" class="form-group">
+          <p class="label">
+            8. Please provide your current projected runway with funds raised, and an 18 month FTE (full-time employee) plan, if
+            applicable?How many people participated in the ICO? <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="49" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-50" class="form-group">
+          <p class="label">
+            9. Which jurisdictions were allowed to participate in the sale? <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="50" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-51" class="form-group">
+          <p class="label">
+            10. In which jurisdiction was the issuer of the token/coin established, and from which jurisdiction was the ICO
+            conducted? <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="51" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-52" class="form-group">
+          <p class="label">
+            11. Was there a limit on tokens that can be purchased by one individual the Project’s ICO? If so, please provide the
+            individual cap. <i class="red">*</i>
+          </p>
+        
+          <input type="text" name="52" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-53" class="form-group">
+          <p class="label">12a. Were the purchasers of the tokens/coins required to execute an agreement documenting their
+            purchase and/or consent
+            to terms and conditions? <i class="red">*</i></p>
+        
+          <p class="paragraph-12">If Yes, please tick Yes and describe further in "Other" below.</p>
+        
+          <label class="selector-wrapper">Yes
+            <input type="radio" name="53" onchange="onChange(this.name, this.value)" value="Yes" required />
+            <span class="custom-radio"></span>
+          </label>
+          <label class="selector-wrapper">No
+            <input type="radio" name="53" onchange="onChange(this.name, this.value)" value="No" required />
+            <span class="custom-radio"></span>
+          </label>
+          <label class="selector-wrapper">Other:
+            <input type="radio" name="53" value="Other" required />
+            <span class="custom-radio"></span>
+            <input name="53" type="text" onchange="onChange(this.name, this.value)" class="other-info" required value="" />
+          </label>
+        </div>
+        
+        <div id="field-54" class="form-group">
+          <p class="label">
+            12b. If you answered "Yes" to previous questions, please provide the form(s) of such agreements and/or terms and
+            conditions. <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="54" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-55" class="form-group">
+          <p class="label">12c. Did the agreements described in the previous question require or did the Project otherwise
+            require any
+            acknowledgments or representations as a condition to receiving tokens/coins? If yes, please describe <i
+              class="red">*</i></p>
+        
+          <p class="paragraph-12">If Yes, please tick Yes and describe further in "Other" below.</p>
+        
+          <label class="selector-wrapper"> Yes
+            <input type="radio" name="55" onchange="onChange(this.name, this.value)" value="Yes" required />
+            <span class="custom-radio"></span>
+          </label>
+          <label class="selector-wrapper">No
+            <input type="radio" name="55" onchange="onChange(this.name, this.value)" value="No" required />
+            <span class="custom-radio"></span>
+          </label>
+          <label class="selector-wrapper">Other:
+            <input type="radio" name="55" value="Other" required />
+            <span class="custom-radio"></span>
+            <input name="55" type="text" onchange="onChange(this.name, this.value)" class="other-info" required value="" />
+          </label>
+        </div>
+        
+        <div id="field-56" class="form-group">
+          <p class="label">
+            13. Were tokens/coins issued outside of the ICO? If so, were such issuances pursuant to a private placement or
+            offering?
+            Please describe the circumstances. <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="56" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-57" class="form-group">
+          <p class="label">
+            14. Were KYC/AML/sanctions compliance procedures applied to purchasers of tokens/coins in each of the
+            offerings/sales?
+            If so, please describe. <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="57" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+      </div>
+
+      <div>
+        <section class="intro">
+          <h3 class="heading">Binance Listing Application Form</h3>
+        
+          <div class="paragraph-section">
+        
+            <p class="paragraph">The name and photo associated with your Google account will be recorded when you upload files
+              and submit this form.</p>
+        
+            <br>
+        
+            <p class="paragraph red">* Required</p>
+        
+          </div>
+        </section>
+        
+        <div id="field-58" class="form-group no-pad">
+          <div class="form-heading">
+            <p class="paragraph">Wallet</h3>
+          </div>
+          <div class="pad">
+            <p class="label">1. Is your token/coin ERC 20 compliant?<i class="red">*</i></p>
+        
+            <label class="selector-wrapper">Yes
+              <input type="radio" name="58" onchange="onChange(this.name, this.value)" value="Yes" required />
+              <span class="custom-radio"></span>
+            </label>
+            <label class="selector-wrapper">No
+              <input type="radio" name="58" onchange="onChange(this.name, this.value)" value="No" required />
+              <span class="custom-radio"></span>
+            </label>
+          </div>
+        </div>
+        
+        <div id="field-59" class="form-group">
+          <p class="label">2. Please provide a link to the relevant blockchain explorer.
+            <i class="red">*</i>
+          </p>
+        
+          <input type="text" name="59" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-60" class="form-group">
+          <p class="label">3. Which protocol is the token/coin based on? <i class="red">*</i></p>
+        
+          <label class="selector-wrapper paragraph mg-horizontal">Binance Chain
+            <input type="checkbox" name="60" onchange="onSelectCheckbox(this.name, this.value)" value="Binance Chain"
+              required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Ethereum
+            <input type="checkbox" name="60" onchange="onSelectCheckbox(this.name, this.value)" value="Ethereum" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">EOS
+            <input type="checkbox" name="60" onchange="onSelectCheckbox(this.name, this.value)" value="EOS" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">NEO
+            <input type="checkbox" name="60" onchange="onSelectCheckbox(this.name, this.value)" value="NEO" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">QTUM
+            <input type="checkbox" name="60" onchange="onSelectCheckbox(this.name, this.value)" value="QTUM" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">None
+            <input type="checkbox" name="60" onchange="onSelectCheckbox(this.name, this.value)" value="None" required />
+            <span class="custom-checkbox"></span>
+          </label>
+          <label class="selector-wrapper paragraph mg-horizontal">Other:
+            <input type="checkbox" value="Other" required />
+            <span class="custom-checkbox"></span>
+            <input name="60" type="text" onchange="onSelectOtherCheckbox(this.name, this.value)" class="other-info" required
+              value="" />
+          </label>
+        </div>
+        
+        <div id="field-61" class="form-group">
+          <p class="label">
+            4. Does the project team actively maintain a full node for your token? Please explain in detail below. <i
+              class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="61" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-62" class="form-group">
+          <p class="label">
+            5. Does the project have a light wallet (non-full node) available on Mac? Please explain in detail below. <i
+              class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="62" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-63" class="form-group">
+          <p class="label">
+            6. Is your token integrated with hardware wallet providers (Ledger/Trezor)? <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="63" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+      </div>
+
+      <div>
+        <section class="intro">
+          <h3 class="heading">Binance Listing Application Form</h3>
+        
+          <div class="paragraph-section">
+        
+            <p class="paragraph">The name and photo associated with your Google account will be recorded when you upload files
+              and submit this form.</p>
+        
+            <br>
+        
+            <p class="paragraph red">* Required</p>
+        
+          </div>
+        </section>
+        
+        <div id="field-64" class="form-group no-pad">
+          <div class="form-heading">
+            <p class="paragraph">Miscellaneous</h3>
+          </div>
+          <div class="pad">
+            <p class="label">1. How much worth of tokens are you willing to reserve for post-listing marketing activities on
+              Binance.com?
+              <i class="red">*</i>
+            </p>
+        
+            <input type="text" name="64" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+          </div>
+        </div>
+        
+        <div id="field-65" class="form-group">
+          <p class="label">2. Do you accept that, even after payment, Binance may delist your token/coin and you may not be
+            eligible for any
+            refunds?<i class="red">*</i></p>
+        
+          <div class="selector-wrapper">Yes, I consent
+            <input type="radio" name="65" onchange="onChange(this.name, this.value)" value="Yes" required />
+            <span class="custom-radio"></span>
+          </div>
+          <div class="selector-wrapper">No, I do not consent
+            <input type="radio" name="65" onchange="onChange(this.name, this.value)" value="No" required />
+            <span class="custom-radio"></span>
+          </div>
+        
+        </div>
+        
+        <div id="field-66" class="form-group">
+          <p class="label">3. Are you already listed on CoinMarketCap?<i class="red">*</i></p>
+        
+          <label class="selector-wrapper">Yes
+            <input type="radio" name="66" onchange="onChange(this.name, this.value)" value="Yes" required />
+            <span class="custom-radio"></span>
+          </label>
+          <label class="selector-wrapper">No
+            <input type="radio" name="66" onchange="onChange(this.name, this.value)" value="No" required />
+            <span class="custom-radio"></span>
+          </label>
+        
+        </div>
+        
+        <div id="field-67" class="form-group">
+          <p class="label">
+            4. If you're already listed on CoinMarketCap, please provide a link to the token page. If not, please submit the
+            listing
+            application to CoinMarketCap via <a
+              href="https://support.coinmarketcap.com/hc/en-us/requests/new?ticket_form_id=360000493112">https://support.coinmarketcap.com/hc/en-us/requests/new?ticket_form_id=360000493112</a>
+            and
+            provide your ticket number below. <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" name="67" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-68" class="form-group">
+          <p class="label">5. Are you willing to provide backlinks (dofollow) to both Binance and CoinMarketCap on your official
+            website?<i class="red">*</i></p>
+        
+          <label class="selector-wrapper">Yes
+            <input type="radio" name="68" onchange="onChange(this.name, this.value)" value="Yes" required />
+            <span class="custom-radio"></span>
+          </label>
+          <label class="selector-wrapper">No
+            <input type="radio" name="68" onchange="onChange(this.name, this.value)" value="No" required />
+            <span class="custom-radio"></span>
+          </label>
+        
+        </div>
+        
+        <div id="field-69" class="form-group">
+          <p class="label">
+            6. Please create an 8 character anti-phishing code of your choice below. Ensure that you save this code somewhere
+            secure. [IMPORTANT] <i class="red">*</i>
+          </p>
+        
+          <p class="paragraph-12">If you receive any email from the Binance team, we will provide this code back to you at the
+            very beginning of the
+            email. This is to ensure that you are able to distinguish between emails from Binance and emails from scammers. If
+            you
+            receive an email from Binance without the anti-phishing code, please request for the code and confirm that it
+            matches
+            before any further correspondence. If they are unable to reproduce the code that you have selected, they are likely
+            spoofing the email as a scammer.</p>
+        
+        
+          <input type="text" name="69" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        <div id="field-70" class="form-group">
+          <p class="label">
+            7. Thank you for choosing Binance.com! If there is anything else you would like to add, please feel free to do so
+            below. <i class="red">*</i>
+          </p>
+        
+          <input type="text" name="70" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+      </div>
+
+      <div>
+        <section class="intro">
+          <h3 class="heading">Binance Listing Application Form</h3>
+        
+          <div class="paragraph-section">
+        
+            <p class="paragraph">The name and photo associated with your Google account will be recorded when you upload files
+              and submit this form.</p>
+        
+            <br>
+        
+            <p class="paragraph red">* Required</p>
+        
+          </div>
+        </section>
+        
+        <div class="form-group no-pad">
+          <div class="form-heading">
+            <p class="paragraph">Project Updates</h3>
+          </div>
+          <div class="pad">
+            <p class="paragraph-12">Note that you are required to wait one month after your previous application before
+              reapplying.</p>
+          </div>
+        </div>
+        
+        <div id="field-71" class="form-group">
+          <p class="label">
+            1. On what date was the latest application/update submitted? <i class="red">*</i>
+          </p>
+          <br>
+          <p class="paragraph-12">Date</p>
+        
+          <input type="date" id="71" name="71" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        
+        <div id="field-72" class="form-group">
+          <p class="label">
+            2. Please briefly describe any Project or token/coin changes occurring since your initial application that support
+            reconsideration of whether to list your token/coin. <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" id="72" name="72" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-73" class="form-group">
+          <p class="label">
+            3. Has there been a change in the Project’s regulatory or legal status that you had reported in the initial
+            application?
+            If so, please describe. <i class="red">*</i>
+          </p>
+        
+        
+          <input type="text" id="73" name="73" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-74" class="form-group">
+          <p class="label">
+            4. Please provide any other projects updates or developments that you would like to share. <i class="red">*</i>
+          </p>
+        
+          <input type="text" id="74" name="74" onchange="onChange(this.name, this.value)" placeholder="Your answer" required />
+        </div>
+        
+        <div id="field-75" class="form-group">
+          <p class="label">5. Please provide any additional or supplementary documents that you wish to share. <i
+              class="red">*</i></p>
+        
+          <div class="file-input-wrapper">
+            <input type="file" id="75" name="75" onchange="handleFile(this)" required />
+            <button id="file-input-75" class="file-input">Add File</button>
+            <div id="filelist-75"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <div class="footer">
       <div>

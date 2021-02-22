@@ -138,14 +138,27 @@ let isFieldEmpty = (step, fileCategory) => {
 const categories = getCategories();
 
 function getPage() {
-	fetch(`sections/section-${page}.html`)
-		.then(function (response) {
-			return response.text();
-		})
-		.then(function (body) {
-			document.getElementById('form').innerHTML = body;
-		});
-	window.scrollTo(0, 0);
+	// fetch(`sections/section-${page}.html`)
+	// 	.then(function (response) {
+	// 		return response.text();
+	// 	})
+	// 	.then(function (body) {
+	// 		document.getElementById('form').innerHTML = body;
+	// 	});
+
+	const children = document.getElementById('form').children;
+
+	console;
+
+	for (let i = 0; i < children.length; i++) {
+		if (page === i + 1) {
+			children[i].style.display = 'block';
+		} else {
+			children[i].style.display = 'none';
+		}
+	}
+
+	document.getElementById('body').scrollIntoView({ behavior: 'smooth' });
 
 	if (page === 10) {
 		document.getElementById('next-button').style.display = 'none';
@@ -312,7 +325,7 @@ function handleFiles(input) {
 
 	document.getElementById(`filelist-${input.name}`).innerHTML = '';
 	for (let file of fileFields[categories[page - 1]][input.name]) {
-		document.getElementById(`filelist-${input.name}`).innerHTML = item(file);
+		document.getElementById(`filelist-${input.name}`).innerHTML += item(file);
 	}
 
 	console.log(fileFields);
@@ -396,9 +409,9 @@ async function saveFile() {
 
 	for (let key of keys) {
 		console.log(files[key]);
-		console.log(typeof files[key]);
+		console.log(files[key]?.length);
 		if (files[key] !== null) {
-			if (typeof files[key] === 'object') {
+			if (files[key]?.length === undefined) {
 				const formdata = new FormData();
 				formdata.append('file', files[key]);
 
@@ -410,8 +423,7 @@ async function saveFile() {
 							// mode: 'no-cors',
 							headers: {
 								Authorization:
-									'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o',
-								'Content-Type': 'multipart/form-data'
+									'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o'
 							},
 							body: formdata
 						}
@@ -425,6 +437,7 @@ async function saveFile() {
 			} else {
 				for (let file of files[key]) {
 					const formdata = new FormData();
+					console.log(file);
 					formdata.append('file', file);
 					try {
 						const response = await fetch(
@@ -434,8 +447,7 @@ async function saveFile() {
 								// mode: 'no-cors',
 								headers: {
 									Authorization:
-										'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o',
-									'Content-Type': 'multipart/form-data'
+										'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o'
 								},
 								body: formdata
 							}
@@ -456,7 +468,7 @@ async function onSubmit() {
 		isFieldEmpty(categories[page - 1], null) && isFieldEmpty('fileFields', categories[page - 1]);
 	if (!callout) {
 		await saveFile();
-		// await saveAnswers();
+		await saveAnswers();
 	} else {
 		calloutError(callout);
 	}
