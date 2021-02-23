@@ -238,7 +238,7 @@ function onPrevious() {
 function onChange(name, value) {
 	if (name === 'email') {
 		email = value;
-		fetch(`http://node.devng.host/api/v1/answers/email/${email}`, {
+		fetch(`https://node.devng.host/api/v1/answers/email/${email}`, {
 			headers: {
 				Authorization:
 					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o'
@@ -393,7 +393,7 @@ async function saveAnswers() {
 	};
 
 	try {
-		const response = await fetch('http://node.devng.host/api/v1/answers', {
+		const response = await fetch('https://node.devng.host/api/v1/answers', {
 			method: 'POST',
 			// mode: 'no-cors',
 			headers: {
@@ -420,8 +420,6 @@ async function saveFile() {
 	const keys = Object.keys(files);
 
 	for (let key of keys) {
-		console.log(files[key]);
-		console.log(files[key]?.length);
 		if (files[key] !== null) {
 			if (files[key]?.length === undefined) {
 				const formdata = new FormData();
@@ -429,7 +427,7 @@ async function saveFile() {
 
 				try {
 					const response = await fetch(
-						`http://node.devng.host/api/v1/answers/upload?email=${email}&qid=${key}`,
+						`https://node.devng.host/api/v1/answers/upload?email=${email}&qid=${key}`,
 						{
 							method: 'POST',
 							// mode: 'no-cors',
@@ -453,7 +451,7 @@ async function saveFile() {
 					formdata.append('file', file);
 					try {
 						const response = await fetch(
-							`http://node.devng.host/api/v1/answers/upload?email=${email}&qid=${key}`,
+							`https://node.devng.host/api/v1/answers/upload?email=${email}&qid=${key}`,
 							{
 								method: 'POST',
 								// mode: 'no-cors',
