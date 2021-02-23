@@ -118,21 +118,23 @@ let isFieldEmpty = (step, fileCategory) => {
 	const keys =
 		step === 'fileFields' ? Object.keys(fileFields[fileCategory]) : Object.keys(fields[step]);
 	let callout;
-	const names = ['7', '11', '30', '32', '75'];
+	// const names = ['7', '11', '30', '32', '75'];
 	console.log(fields['intro']['1'] === '' || fields['intro']['1']?.length < 1);
+	console.log(fileFields['intro']['7'] === null || fileFields['intro']['7']?.length < 1);
 	for (let key of keys) {
 		if (step === 'fileFields') {
 			if (fileFields[fileCategory][key] === null || fileFields[fileCategory][key]?.length < 1) {
 				callout = key;
 				break;
-			} else {
-				if (fields[step][key] === '' || fields[step][key]?.length < 1) {
-					callout = key;
-					break;
-				}
+			}
+		} else {
+			if (fields[step][key] === '' || fields[step][key]?.length < 1) {
+				callout = key;
+				break;
 			}
 		}
 	}
+
 	return callout;
 };
 
@@ -218,9 +220,7 @@ function loadhtml() {
 
 function onNext() {
 	const callout =
-		isFieldEmpty(categories[page - 1], null) && isFieldEmpty('fileFields', categories[page - 1]);
-	console.log(isFieldEmpty(categories[page - 1], null));
-	console.log(isFieldEmpty('fileFields', categories[page - 1]));
+		isFieldEmpty(categories[page - 1], null) || isFieldEmpty('fileFields', categories[page - 1]);
 	if (!callout) {
 		moveToNextPage();
 		getSections();
@@ -478,7 +478,7 @@ async function saveFile() {
 
 async function onSubmit() {
 	const callout =
-		isFieldEmpty(categories[page - 1], null) && isFieldEmpty('fileFields', categories[page - 1]);
+		isFieldEmpty(categories[page - 1], null) || isFieldEmpty('fileFields', categories[page - 1]);
 	if (!callout) {
 		await saveFile();
 		await saveAnswers();
