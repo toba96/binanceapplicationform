@@ -36,7 +36,7 @@ let fields = {
 	product: {
 		26: '',
 		27: '',
-		28: '',
+		28: [],
 		29: '',
 		31: ''
 	},
@@ -74,7 +74,7 @@ let fields = {
 	wallet: {
 		58: '',
 		59: '',
-		60: '',
+		60: [],
 		61: '',
 		62: '',
 		63: ''
@@ -116,7 +116,7 @@ let getCategories = () => {
 
 let isFieldEmpty = (step, fileCategory) => {
 	const keys =
-		step === 'fileFields' ? Object.keys(fileFields[fileCategory]) : Object.keys(fields[step]);
+		step === 'fileFields' ? Object.keys(fileFields[fileCategory] || {}) : Object.keys(fields[step]);
 	let callout;
 	// const names = ['7', '11', '30', '32', '75'];
 	console.log(fields['intro']['1'] === '' || fields['intro']['1']?.length < 1);
@@ -253,7 +253,6 @@ function onChange(name, value) {
 			});
 	} else {
 		fields[categories[page - 1]][name] = value;
-		document.getElementById(name).value = value;
 
 		if (fields[categories[page - 1]]['9'] === 'Yes') {
 			freshApplication = false;
