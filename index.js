@@ -321,9 +321,9 @@ function handleFiles(input) {
 		`<div class="file-item">${file.name.substring(
 			0,
 			15
-		)}... <button class="remove-btn" onclick="removeFiles(${input.name}, ${
-			file.name
-		})">x</button></div>`;
+		)}... <button class="remove-btn" onclick="removeFiles(
+			${input.name}, '${file.name}'
+		)">x</button></div>`;
 
 	document.getElementById(`filelist-${input.name}`).innerHTML = '';
 	for (let file of fileFields[categories[page - 1]][input.name]) {
@@ -349,17 +349,18 @@ function removeFiles(name, fileName) {
 		file => file.name !== fileName
 	);
 
-	console.log(fileFields[categories[page - 1]][name]);
+	// console.log(fileFields[categories[page - 1]][name]);
 
 	const item = file =>
 		`<div class="file-item">${file.name.substring(
 			0,
 			15
-		)}... <button class="remove-btn" onclick="removeFiles(${name}, ${file.name})">x</button></div>`;
+		)}... <button class="remove-btn" onclick="removeFiles(${name}, '${
+			file.name
+		}')">x</button></div>`;
 
 	document.getElementById(`filelist-${name}`).innerHTML = '';
 	for (let file of fileFields[categories[page - 1]][name]) {
-		console.log(file);
 		document.getElementById(`filelist-${name}`).innerHTML += item(file);
 	}
 
