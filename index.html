@@ -15,11 +15,11 @@
 </head>
 
 <body id="body" onload="loadhtml()">
-  <header class="header">
+  <header id="header" class="header">
     
   </header>
 
-  <main class="main">
+  <main id="main" class="main">
     <section id="form">
       <div>
         <section class="intro">
@@ -102,16 +102,16 @@
         
         
           <label class="selector-wrapper paragraph mg-horizontal">CEO
-            <input type="checkbox" id="3" name="3" onchange="onSelectCheckbox(this.name, this.value)" value="CEO" required />
+            <input type="checkbox" name="3" onchange="onSelectCheckbox(this.name, this.value)" value="CEO" required />
             <span class="custom-checkbox"></span>
           </label>
           <label class="selector-wrapper paragraph mg-horizontal">Founder/ Co-founder
-            <input type="checkbox" id="3" name="3" onchange="onSelectCheckbox(this.name, this.value)" value="Founder/Co-founder"
+            <input type="checkbox" name="3" onchange="onSelectCheckbox(this.name, this.value)" value="Founder/Co-founder"
               required />
             <span class="custom-checkbox"></span>
           </label>
           <label class="selector-wrapper paragraph mg-horizontal">Other:
-            <input type="checkbox" value="Other" required />
+            <input type="checkbox" id="others-3" name="3" onchange="handleCheckOthers(this)" required />
             <span class="custom-checkbox"></span>
             <input name="3" id="3" type="text" onchange="onSelectOtherCheckbox(this.name, this.value)" class="other-info"
               required />
@@ -241,41 +241,41 @@
           <p class="paragraph-12">Tick all that apply.</p>
         
           <label class="selector-wrapper paragraph mg-horizontal">Currency
-            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Currency" required />
+            <input type="checkbox" name="13" onchange="onSelectCheckbox(this.name, this.value)" value="Currency" required />
             <span class="custom-checkbox"></span>
           </label>
           <label class="selector-wrapper paragraph mg-horizontal">Dapp
-            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Dapp" required />
+            <input type="checkbox" name="13" onchange="onSelectCheckbox(this.name, this.value)" value="Dapp" required />
             <span class="custom-checkbox"></span>
           </label>
           <label class="selector-wrapper paragraph mg-horizontal">Payment Token
-            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Payment Token" required />
+            <input type="checkbox" name="13" onchange="onSelectCheckbox(this.name, this.value)" value="Payment Token" required />
             <span class="custom-checkbox"></span>
           </label>
           <label class="selector-wrapper paragraph mg-horizontal">Protocol
-            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Protocol" required />
+            <input type="checkbox" name="13" onchange="onSelectCheckbox(this.name, this.value)" value="Protocol" required />
             <span class="custom-checkbox"></span>
           </label>
           <label class="selector-wrapper paragraph mg-horizontal">Platform
-            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Platform" required />
+            <input type="checkbox" name="13" onchange="onSelectCheckbox(this.name, this.value)" value="Platform" required />
             <span class="custom-checkbox"></span>
           </label>
           <label class="selector-wrapper paragraph mg-horizontal">Stable Coin
-            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Stable Coin" required />
+            <input type="checkbox" name="13" onchange="onSelectCheckbox(this.name, this.value)" value="Stable Coin" required />
             <span class="custom-checkbox"></span>
           </label>
           <label class="selector-wrapper paragraph mg-horizontal">Defi
-            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="Defi" required />
+            <input type="checkbox" name="13" onchange="onSelectCheckbox(this.name, this.value)" value="Defi" required />
             <span class="custom-checkbox"></span>
           </label>
           <label class="selector-wrapper paragraph mg-horizontal">NFT
-            <input type="checkbox" name="13" onchange="onChange(this.name, this.value)" value="NFT" required />
+            <input type="checkbox" name="13" onchange="onSelectCheckbox(this.name, this.value)" value="NFT" required />
             <span class="custom-checkbox"></span>
           </label>
           <label class="selector-wrapper paragraph mg-horizontal">Other:
-            <input type="checkbox" value="Other" required />
+            <input type="checkbox" id="others-13" name="13" onchange="handleCheckOthers(this)" required />
             <span class="custom-checkbox"></span>
-            <input name="13" type="text" class="other-info" onchange="onChange(this.name, this.value)" required value="" />
+            <input name="13" id="13" type="text" class="other-info" onchange="onSelectOtherCheckbox(this.name, this.value)" required value="" />
           </label>
         </div>
         
@@ -473,9 +473,9 @@
             <span class="custom-checkbox"></span>
           </label>
           <label class="selector-wrapper paragraph mg-horizontal">Other:
-            <input type="checkbox" value="Other" required />
+            <input type="checkbox" id="others-28" name="28" onchange="handleCheckOthers(this)" required />
             <span class="custom-checkbox"></span>
-            <input name="28" type="text" onchange="onSelectOtherCheckbox(this.name, this.value)" class="other-info" required
+            <input name="28" id="28" type="text" onchange="onSelectOtherCheckbox(this.name, this.value)" class="other-info" required
               value="" />
           </label>
         </div>
@@ -938,9 +938,9 @@
             <span class="custom-checkbox"></span>
           </label>
           <label class="selector-wrapper paragraph mg-horizontal">Other:
-            <input type="checkbox" value="Other" required />
+            <input type="checkbox" id="others-60" name="60" onchange="handleCheckOthers(this)" required />
             <span class="custom-checkbox"></span>
-            <input name="60" type="text" onchange="onSelectOtherCheckbox(this.name, this.value)" class="other-info" required
+            <input name="60" id="60" type="text" onchange="onSelectOtherCheckbox(this.name, this.value)" class="other-info" required
               value="" />
           </label>
         </div>
@@ -1169,9 +1169,10 @@
           </div>
         </div>
       </div>
+
     </section>
 
-    <div class="footer">
+    <div id="footer" class="footer">
       <div>
         <button id="prev-button" onclick="onPrevious()" class="btn">Back</button>
         <button id="next-button" onclick="onNext()" class="btn">Next</button>
@@ -1186,6 +1187,10 @@
       </div>
     </div>
   </main>
+
+  <div id="saved-success">
+    <p>Saved successfully!</p>
+  </div>
 
 <script type="text/javascript" src="index.js"></script>
 

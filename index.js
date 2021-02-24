@@ -17,7 +17,7 @@ let fields = {
 	},
 	project_overview: {
 		12: '',
-		13: '',
+		13: [],
 		14: '',
 		15: '',
 		16: '',
@@ -110,6 +110,124 @@ let fileFields = {
 	}
 };
 
+const defaultFreshApplicationFields = () => ({
+	project_overview: {
+		12: '',
+		13: [],
+		14: '',
+		15: '',
+		16: '',
+		17: '',
+		18: '',
+		19: '',
+		20: '',
+		21: '',
+		22: ''
+	},
+	users_community: {
+		23: '',
+		24: '',
+		25: ''
+	},
+	product: {
+		26: '',
+		27: '',
+		28: [],
+		29: '',
+		31: ''
+	},
+	team: {
+		33: '',
+		34: '',
+		35: '',
+		36: '',
+		37: ''
+	},
+	token_economics: {
+		38: '',
+		39: '',
+		40: '',
+		41: ''
+	},
+	ico: {
+		42: '',
+		43: '',
+		44: '',
+		45: '',
+		46: '',
+		47: '',
+		48: '',
+		49: '',
+		50: '',
+		51: '',
+		52: '',
+		53: '',
+		54: '',
+		55: '',
+		56: '',
+		57: ''
+	},
+	wallet: {
+		58: '',
+		59: '',
+		60: [],
+		61: '',
+		62: '',
+		63: ''
+	},
+	miscellaneous: {
+		64: '',
+		65: '',
+		66: '',
+		67: '',
+		68: '',
+		69: '',
+		70: ''
+	}
+});
+
+const defaultExistingApplicationFields = () => ({
+	project_updates: {
+		71: '',
+		72: '',
+		73: '',
+		74: ''
+	}
+});
+
+const clearFreshApplicationFields = () => {
+	const defaultFields = defaultFreshApplicationFields();
+	fields = { ...fields, ...defaultFields };
+	const keys = Object.keys(defaultFields);
+
+	for (let key of keys) {
+		const subKeys = Object.keys(defaultFields[key]);
+
+		for (let subKey of subKeys) {
+			document.getElementsByName(subKey)[0].value = fields[key][subKey];
+			if (document.getElementsByName(subKey).length > 1) {
+				for (children of document.getElementsByName(subKey)) {
+					children.checked = false;
+				}
+			}
+		}
+	}
+};
+
+const clearExistingApplicationFields = () => {
+	const defaultFields = defaultExistingApplicationFields();
+	fields = { ...fields, ...defaultFields };
+	const keys = Object.keys(defaultFields);
+
+	for (let key of keys) {
+		const subKeys = Object.keys(defaultFields[key]);
+
+		for (let subKey of subKeys) {
+			document.getElementsByName(subKey)[0].value = fields[key][subKey];
+		}
+	}
+};
+
 let getCategories = () => {
 	return Object.keys(fields);
 };
@@ -118,9 +236,7 @@ let isFieldEmpty = (step, fileCategory) => {
 	const keys =
 		step === 'fileFields' ? Object.keys(fileFields[fileCategory] || {}) : Object.keys(fields[step]);
 	let callout;
-	// const names = ['7', '11', '30', '32', '75'];
-	console.log(fields['intro']['1'] === '' || fields['intro']['1']?.length < 1);
-	console.log(fileFields['intro']['7'] === null || fileFields['intro']['7']?.length < 1);
+
 	for (let key of keys) {
 		if (step === 'fileFields') {
 			if (fileFields[fileCategory][key] === null || fileFields[fileCategory][key]?.length < 1) {
@@ -140,10 +256,8 @@ let isFieldEmpty = (step, fileCategory) => {
 
 const categories = getCategories();
 
-function getSections() {
+function getSection() {
 	const children = document.getElementById('form').children;
-
-	console;
 
 	for (let i = 0; i < children.length; i++) {
 		if (page === i + 1) {
@@ -170,10 +284,12 @@ function getSections() {
 function moveToNextPage() {
 	if (!freshApplication) {
 		page = 10;
+		clearFreshApplicationFields();
 		document.getElementById('guage').style.width = '12rem';
 		document.getElementById('guage-text').textContent = `${page} of 10`;
 	} else {
 		if (page < totalPages) page++;
+		clearExistingApplicationFields();
 		document.getElementById('guage').style.width = `${(page + 1) * 1.2}rem`;
 		document.getElementById('guage-text').textContent = `${page + 1} of 10`;
 	}
@@ -205,9 +321,9 @@ function calloutError(callout) {
 	let p = document.createElement('p');
 	p.textContent = 'This is a required question';
 	p.style.color = '#ff0000';
+	p.style.marginTop = '1.5rem';
 	document.getElementById(`field-${callout}`).appendChild(p);
 	document.getElementById(`field-${callout}`).style.borderColor = '#ff0000';
-	document.getElementById(`field-${callout}`).style.marginTop = '1rem';
 
 	document.getElementById(`field-${callout}`).scrollIntoView({
 		behavior: 'smooth'
@@ -215,7 +331,7 @@ function calloutError(callout) {
 }
 
 function loadhtml() {
-	getSections();
+	getSection();
 }
 
 function onNext() {
@@ -223,7 +339,7 @@ function onNext() {
 		isFieldEmpty(categories[page - 1], null) || isFieldEmpty('fileFields', categories[page - 1]);
 	if (!callout) {
 		moveToNextPage();
-		getSections();
+		getSection();
 	} else {
 		calloutError(callout);
 	}
@@ -232,7 +348,7 @@ function onNext() {
 function onPrevious() {
 	moveToPreviousPage();
 
-	getSections();
+	getSection();
 }
 
 function onChange(name, value) {
@@ -254,7 +370,7 @@ function onChange(name, value) {
 	} else {
 		fields[categories[page - 1]][name] = value;
 
-		if (fields[categories[page - 1]]['9'] === 'Yes') {
+		if (fields['intro']['9'] === 'Yes') {
 			freshApplication = false;
 		} else {
 			freshApplication = true;
@@ -263,22 +379,21 @@ function onChange(name, value) {
 }
 
 function onSelectOtherCheckbox(name, value) {
-	const isOtherField = fields[categories[page - 1]][name].find(
-		str => str !== 'CEO' && str !== 'Founder/Co-founder'
-	);
+	if (document.getElementById(`others-${name}`).checked === true) {
+		const inputValue = document.getElementById(name).value;
+		const isOtherField = fields[categories[page - 1]][name].find(str => str === inputValue);
 
-	if (isOtherField) {
-		fields[categories[page - 1]][name] = fields[categories[page - 1]][name].map(item => {
-			if (item !== 'CEO' && item !== 'Founder/Co-founder') {
-				item = value;
-			}
-			return item;
-		});
-	} else {
-		fields[categories[page - 1]][name] = [...fields[categories[page - 1]][name], value];
+		if (isOtherField) {
+			fields[categories[page - 1]][name] = fields[categories[page - 1]][name].map(item => {
+				if (item === inputValue) {
+					item = value;
+				}
+				return item;
+			});
+		} else {
+			fields[categories[page - 1]][name] = [...fields[categories[page - 1]][name], value];
+		}
 	}
-
-	console.log(fields);
 }
 
 function onSelectCheckbox(name, value) {
@@ -291,8 +406,22 @@ function onSelectCheckbox(name, value) {
 	} else {
 		fields[categories[page - 1]][name] = [...fields[categories[page - 1]][name], value];
 	}
+}
 
-	console.log(fields);
+function handleCheckOthers(input) {
+	const inputValue = document.getElementById(input.name).value;
+	if (input.checked === false) {
+		fields[categories[page - 1]][input.name] = fields[categories[page - 1]][input.name].filter(
+			str => str !== inputValue
+		);
+	} else {
+		if (inputValue !== '') {
+			fields[categories[page - 1]][input.name] = [
+				...fields[categories[page - 1]][input.name],
+				inputValue
+			];
+		}
+	}
 }
 
 function handleFile(input) {
@@ -307,8 +436,6 @@ function handleFile(input) {
 
 	document.getElementById(input.name).style.display = 'none';
 	document.getElementById(`file-input-${input.name}`).style.display = 'none';
-
-	console.log(fileFields);
 }
 
 function handleFiles(input) {
@@ -329,8 +456,6 @@ function handleFiles(input) {
 	for (let file of fileFields[categories[page - 1]][input.name]) {
 		document.getElementById(`filelist-${input.name}`).innerHTML += item(file);
 	}
-
-	console.log(fileFields);
 }
 
 function removeFile(name) {
@@ -340,16 +465,12 @@ function removeFile(name) {
 	document.getElementById(`file-input-${name}`).style.display = 'block';
 
 	document.getElementById(`filelist-${name}`).innerHTML = '';
-
-	console.log(fileFields);
 }
 
 function removeFiles(name, fileName) {
 	fileFields[categories[page - 1]][name] = fileFields[categories[page - 1]][name].filter(
 		file => file.name !== fileName
 	);
-
-	// console.log(fileFields[categories[page - 1]][name]);
 
 	const item = file =>
 		`<div class="file-item">${file.name.substring(
@@ -363,8 +484,6 @@ function removeFiles(name, fileName) {
 	for (let file of fileFields[categories[page - 1]][name]) {
 		document.getElementById(`filelist-${name}`).innerHTML += item(file);
 	}
-
-	console.log(fileFields);
 }
 
 async function saveAnswers() {
@@ -396,14 +515,22 @@ async function saveAnswers() {
 	try {
 		const response = await fetch('https://node.devng.host/api/v1/answers', {
 			method: 'POST',
-			// mode: 'no-cors',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(inputFields)
 		});
-		const result = response.text();
+		const result = await response.text();
 		console.log(result);
+		if (result === 'Saved successfully') {
+			document.getElementById('main').style.display = 'none';
+			document.getElementById('header').style.display = 'none';
+			document.getElementById('saved-success').style.display = 'block';
+
+			setTimeout(() => {
+				window.location.href = 'https://binance.sg';
+			}, [3000]);
+		}
 	} catch (error) {
 		console.log(error);
 	}
@@ -427,44 +554,30 @@ async function saveFile() {
 				formdata.append('file', files[key]);
 
 				try {
-					const response = await fetch(
-						`https://node.devng.host/api/v1/answers/upload?email=${email}&qid=${key}`,
-						{
-							method: 'POST',
-							// mode: 'no-cors',
-							headers: {
-								Authorization:
-									'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o'
-							},
-							body: formdata
-						}
-					);
-
-					const result = response.text();
-					console.log(result);
+					await fetch(`https://node.devng.host/api/v1/answers/upload?email=${email}&qid=${key}`, {
+						method: 'POST',
+						headers: {
+							Authorization:
+								'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o'
+						},
+						body: formdata
+					});
 				} catch (error) {
 					console.log(error);
 				}
 			} else {
 				for (let file of files[key]) {
 					const formdata = new FormData();
-					console.log(file);
 					formdata.append('file', file);
 					try {
-						const response = await fetch(
-							`https://node.devng.host/api/v1/answers/upload?email=${email}&qid=${key}`,
-							{
-								method: 'POST',
-								// mode: 'no-cors',
-								headers: {
-									Authorization:
-										'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o'
-								},
-								body: formdata
-							}
-						);
-						const result = response.text();
-						console.log(result);
+						await fetch(`https://node.devng.host/api/v1/answers/upload?email=${email}&qid=${key}`, {
+							method: 'POST',
+							headers: {
+								Authorization:
+									'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o'
+							},
+							body: formdata
+						});
 					} catch (error) {
 						console.log(error);
 					}
@@ -478,11 +591,15 @@ async function onSubmit() {
 	const callout =
 		isFieldEmpty(categories[page - 1], null) || isFieldEmpty('fileFields', categories[page - 1]);
 	if (!callout) {
+		document.getElementById(
+			'submit-button'
+		).innerHTML = `<img src="./images/loading.gif" alt="Loading..." />`;
+
 		await saveFile();
 		await saveAnswers();
+
+		document.getElementById('submit-button').innerHTML = `Submit`;
 	} else {
 		calloutError(callout);
 	}
 }
-
-//TODO: HANDLE WHEN 'OTHERS' IS UNCHECKED
