@@ -334,9 +334,13 @@ function loadhtml() {
 	getSection();
 }
 
+function isEmailEmpty(){
+	return  email === '' ? 'email' : null
+}
+
 function onNext() {
 	const callout =
-		isFieldEmpty(categories[page - 1], null) || isFieldEmpty('fileFields', categories[page - 1]);
+		isEmailEmpty() || isFieldEmpty(categories[page - 1], null) || isFieldEmpty('fileFields', categories[page - 1]);
 	if (!callout) {
 		moveToNextPage();
 		getSection();
