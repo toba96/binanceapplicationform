@@ -319,28 +319,43 @@ function calloutError(callout) {
 	}
 
 	let p = document.createElement('p');
-	p.textContent = 'This is a required question';
+	p.textContent = callout === 'invalid email' ? 'Email is invalid' : 'This is a required question';
 	p.style.color = '#ff0000';
 	p.style.marginTop = '1.5rem';
-	document.getElementById(`field-${callout}`).appendChild(p);
-	document.getElementById(`field-${callout}`).style.borderColor = '#ff0000';
+	document
+		.getElementById(`field-${callout === 'invalid email' ? 'email' : callout}`)
+		.appendChild(p);
+	document.getElementById(
+		`field-${callout === 'invalid email' ? 'email' : callout}`
+	).style.borderColor = '#ff0000';
 
-	document.getElementById(`field-${callout}`).scrollIntoView({
-		behavior: 'smooth'
-	});
+	document
+		.getElementById(`field-${callout === 'invalid email' ? 'email' : callout}`)
+		.scrollIntoView({
+			behavior: 'smooth'
+		});
 }
 
 function loadhtml() {
 	getSection();
 }
 
-function isEmailEmpty(){
-	return  email === '' ? 'email' : null
+function isEmailEmpty() {
+	return email === '' ? 'email' : null;
+}
+
+function validateEmail() {
+	const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	const isValid = re.test(String(email).toLowerCase());
+	return isValid ? null : 'invalid email';
 }
 
 function onNext() {
 	const callout =
-		isEmailEmpty() || isFieldEmpty(categories[page - 1], null) || isFieldEmpty('fileFields', categories[page - 1]);
+		isEmailEmpty() ||
+		validateEmail() ||
+		isFieldEmpty(categories[page - 1], null) ||
+		isFieldEmpty('fileFields', categories[page - 1]);
 	if (!callout) {
 		moveToNextPage();
 		getSection();
@@ -525,7 +540,6 @@ async function saveAnswers() {
 			body: JSON.stringify(inputFields)
 		});
 		const result = await response.text();
-		console.log(result);
 		if (result === 'Saved successfully') {
 			document.getElementById('main').style.display = 'none';
 			document.getElementById('header').style.display = 'none';
