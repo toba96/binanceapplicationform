@@ -102,11 +102,11 @@ let fileFields = {
 		11: []
 	},
 	product: {
-		30: null,
-		32: null
+		30: [],
+		32: []
 	},
 	project_updates: {
-		75: null
+		75: []
 	}
 };
 
@@ -293,6 +293,17 @@ function moveToNextPage() {
 		document.getElementById('guage').style.width = `${(page + 1) * 1.2}rem`;
 		document.getElementById('guage-text').textContent = `${page + 1} of 10`;
 	}
+
+	if (page > 1 && page < 5) {
+		document.getElementById('guage').style.backgroundColor = '#4285f3';
+	}
+	if (page > 4 && page < 9) {
+		document.getElementById('guage').style.backgroundColor = '#098591';
+	}
+
+	if (page === 9 || page === 10) {
+		document.getElementById('guage').style.backgroundColor = '#3ea853';
+	}
 }
 
 function moveToPreviousPage() {
@@ -313,15 +324,27 @@ function calloutError(callout) {
 
 	for (let form_group of form_groups) {
 		form_group.style.borderColor = '#e7e8eb';
-		if (form_group.lastElementChild.innerHTML === 'This is a required question') {
+		if (
+			form_group.lastElementChild.innerHTML ===
+				`<span class="warning"></span> This is a required question` ||
+			form_group.lastElementChild.innerHTML === `<span class="warning"></span> Email is invalid`
+		) {
 			form_group.removeChild(form_group.lastElementChild);
 		}
 	}
 
 	let p = document.createElement('p');
-	p.textContent = callout === 'invalid email' ? 'Email is invalid' : 'This is a required question';
+	p.innerHTML =
+		callout === 'invalid email'
+			? `<span class="warning"></span> Email is invalid`
+			: `<span class="warning"></span> This is a required question`;
+	p.style.display = 'flex';
+	p.style.alignItems = 'flex-start';
+	p.style.justifyContent = 'space-between';
+	p.style.width = '20rem';
 	p.style.color = '#ff0000';
 	p.style.marginTop = '1.5rem';
+	p.style.fontSize = '1.2rem';
 	document
 		.getElementById(`field-${callout === 'invalid email' ? 'email' : callout}`)
 		.appendChild(p);
@@ -543,7 +566,7 @@ async function saveAnswers() {
 		if (result === 'Saved successfully') {
 			document.getElementById('main').style.display = 'none';
 			document.getElementById('header').style.display = 'none';
-			document.getElementById('saved-success').style.display = 'block';
+			document.getElementById('success-wrapper').style.display = 'block';
 
 			setTimeout(() => {
 				window.location.href = 'https://binance.sg';
@@ -609,14 +632,23 @@ async function onSubmit() {
 	const callout =
 		isFieldEmpty(categories[page - 1], null) || isFieldEmpty('fileFields', categories[page - 1]);
 	if (!callout) {
-		document.getElementById(
-			'submit-button'
-		).innerHTML = `<img src="./images/loading.gif" alt="Loading..." />`;
+		const btn_wrapper = document.getElementById('buttonwrapper');
+		document.getElementById('submit-button').style.display = 'none';
+
+		const img = document.createElement('img');
+		img.setAttribute('id', 'loader');
+		img.style.width = '16px';
+		img.style.height = '16px';
+		img.src = 'images/loader.gif';
+
+		btn_wrapper.appendChild(img);
 
 		await saveFile();
 		await saveAnswers();
 
-		document.getElementById('submit-button').innerHTML = `Submit`;
+		const loader = document.getElementById('loader');
+		btn_wrapper.removeChild(loader);
+		document.getElementById('submit-button').style.display = 'inline-block';
 	} else {
 		calloutError(callout);
 	}

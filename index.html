@@ -149,7 +149,7 @@
         
           <div class="file-input-wrapper">
             <input type="file" name="7" id="7" onchange="handleFile(this)" required />
-            <button id="file-input-7" class="file-input">Add File</button>
+            <button id="file-input-7" class="file-input"><span class="upload"></span> Add File</button>
             <div id="filelist-7"></div>
           </div>
         </div>
@@ -203,7 +203,7 @@
         
           <div class="file-input-wrapper">
             <input type="file" id="11" name="11" onchange="handleFiles(this)" required />
-            <button id="file-input-11" class="file-input">Add File</button>
+            <button id="file-input-11" class="file-input"><span class="upload"></span> Add File</button>
             <div id="filelist-11"></div>
           </div>
         </div>
@@ -497,8 +497,8 @@
             open-source portion of the Project. <i class="red">*</i></p>
         
           <div class="file-input-wrapper">
-            <input type="file" id="30" name="30" onchange="handleFile(this)" required />
-            <button id="file-input-30" class="file-input">Add File</button>
+            <input type="file" id="30" name="30" onchange="handleFiles(this)" required />
+            <button id="file-input-30" class="file-input"><span class="upload"></span> Add File</button>
             <div id="filelist-30"></div>
           </div>
         </div>
@@ -520,8 +520,8 @@
           </p>
         
           <div class="file-input-wrapper">
-            <input type="file" id="32" name="32" onchange="handleFile(this)" required />
-            <button id="file-input-32" class="file-input">Add File</button>
+            <input type="file" id="32" name="32" onchange="handleFiles(this)" required />
+            <button id="file-input-32" class="file-input"><span class="upload"></span> Add File</button>
             <div id="filelist-32"></div>
           </div>
         </div>
@@ -1163,8 +1163,8 @@
               class="red">*</i></p>
         
           <div class="file-input-wrapper">
-            <input type="file" id="75" name="75" onchange="handleFile(this)" required />
-            <button id="file-input-75" class="file-input">Add File</button>
+            <input type="file" id="75" name="75" onchange="handleFiles(this)" required />
+            <button id="file-input-75" class="file-input"><span class="upload"></span> Add File</button>
             <div id="filelist-75"></div>
           </div>
         </div>
@@ -1173,7 +1173,7 @@
     </section>
 
     <div id="footer" class="footer">
-      <div>
+      <div id="buttonwrapper">
         <button id="prev-button" onclick="onPrevious()" class="btn">Back</button>
         <button id="next-button" onclick="onNext()" class="btn">Next</button>
         <button id="submit-button" onclick="onSubmit()" class="btn brown">Submit</button>
@@ -1188,8 +1188,11 @@
     </div>
   </main>
 
-  <div id="saved-success">
-    <p>Saved successfully!</p>
+  <div id="success-wrapper">
+    <div id="saved-success">
+      <p>Saved successfully!</p>
+      <span></span>
+    </div>
   </div>
 
 <script type="text/javascript" src="index.js"></script>
