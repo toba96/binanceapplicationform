@@ -261,51 +261,61 @@ const categories = getCategories();
 
 function getSection() {
 	const children = document.getElementById('form').children;
-
-	for (let i = 0; i < children.length; i++) {
-		if (page === i + 1) {
-			children[i].style.display = 'block';
+	if (!freshApplication) {
+		if (page === 1) {
+			children[9].style.display = 'none';
+			children[0].style.display = 'block';
+			document.getElementById('next-button').style.display = 'inline-block';
+			document.getElementById('submit-button').style.display = 'none';
 		} else {
-			children[i].style.display = 'none';
+			children[9].style.display = 'block';
+			children[0].style.display = 'none';
+			document.getElementById('next-button').style.display = 'none';
+			document.getElementById('submit-button').style.display = 'inline-block';
 		}
+	} else {
+		for (let i = 0; i < children.length; i++) {
+			if (page === i + 1) {
+				children[i].style.display = 'block';
+			} else {
+				children[i].style.display = 'none';
+			}
+		}
+
+		document.getElementById('next-button').style.display =
+			page !== totalPages ? 'inline-block' : 'none';
+
+		document.getElementById('submit-button').style.display =
+			page === totalPages ? 'inline-block' : 'none';
 	}
 
 	document.getElementById('body').scrollIntoView({ behavior: 'smooth' });
-
-	if (page === 10) {
-		document.getElementById('next-button').style.display = 'none';
-	} else {
-		document.getElementById('next-button').style.display =
-			page !== totalPages ? 'inline-block' : 'none';
-	}
-
 	document.getElementById('prev-button').style.display = page === 1 ? 'none' : 'inline-block';
-	document.getElementById('submit-button').style.display =
-		page === totalPages || page === totalPages + 1 ? 'inline-block' : 'none';
 }
 
 function moveToNextPage() {
 	if (!freshApplication) {
-		page = 10;
+		page = 2;
 		clearFreshApplicationFields();
 		document.getElementById('guage').style.width = '12rem';
-		document.getElementById('guage-text').textContent = `${page} of 10`;
+		document.getElementById('guage-text').textContent = `${page} of 2`;
+		document.getElementById('guage').style.backgroundColor = '#3ea853';
 	} else {
 		if (page < totalPages) page++;
 		clearExistingApplicationFields();
 		document.getElementById('guage').style.width = `${(page + 1) * 1.2}rem`;
 		document.getElementById('guage-text').textContent = `${page} of 9`;
-	}
 
-	if (page > 1 && page < 4) {
-		document.getElementById('guage').style.backgroundColor = '#4285f3';
-	}
-	if (page > 4 && page < 9) {
-		document.getElementById('guage').style.backgroundColor = '#098591';
-	}
+		if (page > 1 && page < 4) {
+			document.getElementById('guage').style.backgroundColor = '#4285f3';
+		}
+		if (page > 4 && page < 9) {
+			document.getElementById('guage').style.backgroundColor = '#098591';
+		}
 
-	if (page === 9 || page === 10) {
-		document.getElementById('guage').style.backgroundColor = '#3ea853';
+		if (page === 9) {
+			document.getElementById('guage').style.backgroundColor = '#3ea853';
+		}
 	}
 }
 
@@ -313,12 +323,23 @@ function moveToPreviousPage() {
 	if (!freshApplication) {
 		page = 1;
 		document.getElementById('guage').style.width = '1.2rem';
-		document.getElementById('guage-text').textContent = `${page} of 10`;
+		document.getElementById('guage-text').textContent = `${page} of 2`;
+		document.getElementById('guage').style.backgroundColor = '#4285f3';
 	} else {
 		if (page > 1) page--;
 		document.getElementById('guage').style.width = `${(page + 1) * 1.2}rem`;
-		document.getElementById('guage-text').textContent =
-			page === 1 ? '1 of 10' : `${page + 1} of 10`;
+		document.getElementById('guage-text').textContent = page === 1 ? '1 of 9' : `${page} of 9`;
+
+		if (page > 1 && page < 4) {
+			document.getElementById('guage').style.backgroundColor = '#4285f3';
+		}
+		if (page > 4 && page < 9) {
+			document.getElementById('guage').style.backgroundColor = '#098591';
+		}
+
+		if (page === 9) {
+			document.getElementById('guage').style.backgroundColor = '#3ea853';
+		}
 	}
 }
 
