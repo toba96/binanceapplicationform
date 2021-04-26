@@ -232,12 +232,15 @@ let getCategories = () => {
 	return Object.keys(fields);
 };
 
+let notRequiredFields = ['11', '30', '32', '36', '54'];
+
 let isFieldEmpty = (step, fileCategory) => {
 	const keys =
 		step === 'fileFields' ? Object.keys(fileFields[fileCategory] || {}) : Object.keys(fields[step]);
 	let callout;
 
 	for (let key of keys) {
+		if (notRequiredFields.includes(key)) return;
 		if (step === 'fileFields') {
 			if (fileFields[fileCategory][key] === null || fileFields[fileCategory][key]?.length < 1) {
 				callout = key;
@@ -291,10 +294,10 @@ function moveToNextPage() {
 		if (page < totalPages) page++;
 		clearExistingApplicationFields();
 		document.getElementById('guage').style.width = `${(page + 1) * 1.2}rem`;
-		document.getElementById('guage-text').textContent = `${page + 1} of 10`;
+		document.getElementById('guage-text').textContent = `${page} of 9`;
 	}
 
-	if (page > 1 && page < 5) {
+	if (page > 1 && page < 4) {
 		document.getElementById('guage').style.backgroundColor = '#4285f3';
 	}
 	if (page > 4 && page < 9) {
@@ -396,19 +399,19 @@ function onPrevious() {
 function onChange(name, value) {
 	if (name === 'email') {
 		email = value;
-		fetch(`https://node.devng.host/api/v1/answers/email/${email}`, {
-			headers: {
-				Authorization:
-					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o'
-			}
-		})
-			.then(response => response.json())
-			.then(result => {
-				if (result.email === email) {
-					alert(result.message);
-					window.location.href = 'https://binance.sg';
-				}
-			});
+		// fetch(`https://node.devng.host/api/v1/answers/email/${email}`, {
+		// 	headers: {
+		// 		Authorization:
+		// 			'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTYxMzgzNTI0MywiZXhwIjoxNzAwMjM1MjQzfQ.MzswXdL1p5cFl-uczUIUSGk4d4LErg78Lb7eFMnIT-o'
+		// 	}
+		// })
+		// 	.then(response => response.json())
+		// 	.then(result => {
+		// 		if (result.email === email) {
+		// 			alert(result.message);
+		// 			window.location.href = 'https://binance.sg';
+		// 		}
+		// 	});
 	} else {
 		fields[categories[page - 1]][name] = value;
 
@@ -568,9 +571,9 @@ async function saveAnswers() {
 			document.getElementById('header').style.display = 'none';
 			document.getElementById('success-wrapper').style.display = 'block';
 
-			setTimeout(() => {
-				window.location.href = 'https://binance.sg';
-			}, [3000]);
+			// setTimeout(() => {
+			// 	window.location.href = 'https://binance.sg';
+			// }, [3000]);
 		}
 	} catch (error) {
 		console.log(error);
@@ -628,6 +631,70 @@ async function saveFile() {
 	}
 }
 
+async function sendEmail() {
+	// await m.messages.send({
+	// 	key: 'edf8ae4a9759a4834db16bd7beffb2ba-us1',
+	// 	message: {
+	// 		from_email: 'no-reply@binance.com',
+	// 		from_name: 'christophercheng94@gmail.com',
+	// 		to: [{ email, name: fields.intro['1'] }],
+	// 		subject: 'Binance Form',
+	// 		text: 'Text to be sent in the body'
+	// 	}
+	// });
+
+	console.log(email);
+	console.log(fields.intro['1']);
+
+	// $.ajax({
+	// 	type: 'POST',
+	// 	url: ' http://mandrillapp.com/api/1.0/users/ping.json?key=edf8ae4a9759a4834db16bd7beffb2ba-us1'
+	// }).done(response => console.log(response));
+
+	// $.ajax({
+	// 	type: 'POST',
+	// 	url: ' http://mandrillapp.com/api/1.0/rejects/list?key=edf8ae4a9759a4834db16bd7beffb2ba-us1'
+	// }).done(response => console.log(response));
+
+	$.ajax({
+		type: 'POST',
+		url: 'http://mandrillapp.com/api/1.0/messages/send.json',
+		contentType: 'application/json',
+		dataType: 'json',
+		data: JSON.stringify({
+			key: '9c7c91d2af9558fe107a63c4941e2661-us1',
+			headers: {
+				'content-type': 'application/json'
+			},
+			message: {
+				from_email: 'culate007@gmail.com',
+
+				// async: false,
+				// inline_css: false,
+				// headers: {
+				// 	'content-type': 'application/json'
+				// },
+				to: [
+					{
+						email: email,
+						name: fields.intro['1'],
+						type: 'to'
+					}
+				],
+				autotext: false,
+				subject: 'Binance Form',
+				text: 'test this first'
+			}
+		}),
+		success: function (res) {
+			console.log(res);
+		},
+		error: function (err) {
+			console.log(err);
+		}
+	});
+}
+
 async function onSubmit() {
 	const callout =
 		isFieldEmpty(categories[page - 1], null) || isFieldEmpty('fileFields', categories[page - 1]);
@@ -645,6 +712,8 @@ async function onSubmit() {
 
 		await saveFile();
 		await saveAnswers();
+
+		sendEmail();
 
 		const loader = document.getElementById('loader');
 		btn_wrapper.removeChild(loader);
