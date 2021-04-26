@@ -328,7 +328,7 @@ function moveToPreviousPage() {
 	} else {
 		if (page > 1) page--;
 		document.getElementById('guage').style.width = `${(page + 1) * 1.2}rem`;
-		document.getElementById('guage-text').textContent = page === 1 ? '1 of 9' : `${page} of 9`;
+		document.getElementById('guage-text').textContent = `${page} of 9`;
 
 		if (page > 1 && page < 4) {
 			document.getElementById('guage').style.backgroundColor = '#4285f3';
